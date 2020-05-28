@@ -16,10 +16,10 @@ int main()
         cin >> age;
         cout << endl;
 
-        if ( age == 0) return false;
         if ( age <= (of_age-1)) age = 0;
-        if ( age >= of_age && age < president_age) age = 1;
-        if ( age >= president_age) age = 2;
+        else if ( age >= of_age && age < president_age) age = 1;
+        else if ( age >= president_age) age = 2;
+        else return false;
 
         switch(age){
         case 0:
