@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1590696036 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_3\pêtle_for\main.cpp
+	<iostream>
+	<windows.h>
+	<cstdlib>
+
