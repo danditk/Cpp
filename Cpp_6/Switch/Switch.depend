@@ -1,4 +1,7 @@
 # depslib dependency file v1.0
-1590946446 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_6\switch\main.cpp
+1590949318 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_6\switch\main.cpp
 	<iostream>
+	<stdio.h>
+	<windows.h>
+	<conio.h>
 
