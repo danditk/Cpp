@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1590871536 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_4\generator_liczb_gra\main.cpp
+1590929274 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_4\generator_liczb_gra\main.cpp
 	<iostream>
 	<windows.h>
 	<cstdlib>
