@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1590941750 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_5\tablice\main.cpp
+	<iostream>
+	<string>
+
