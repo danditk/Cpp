@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1591037098 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_7\zapis_pliku\main.cpp
+	<iostream>
+	<fstream>
+
