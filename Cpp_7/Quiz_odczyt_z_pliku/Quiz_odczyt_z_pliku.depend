@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1591044542 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_7\quiz_odczyt_z_pliku\main.cpp
+	<iostream>
+	<windows.h>
+	<fstream>
+	<stdlib.h>
+	<algorithm>
+	<string>
+

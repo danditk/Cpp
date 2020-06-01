@@ -2,12 +2,17 @@
 #include <windows.h>
 #include <fstream>
 #include <stdlib.h>
+#include <algorithm>
+#include <string>
 
 
 using namespace std;
 
-string dane_quiz[2], pytania[5], odpowiedzi[5][4], poprawna[5];
-int punkty;
+//string dane_quiz[2], pytania[5], odpowiedzi[5][4], poprawna[5];
+string dane_quiz[2], pytania[5], poprawna[5];
+string odpowiedzA[5], odpowiedzB[5], odpowiedzC[5], odpowiedzD[5];
+string odpowiedz;
+int punkty=0;
 
 int main()
 {
@@ -21,35 +26,25 @@ int main()
 
     string linia;
     int nr_linii = 1;
-    int nr_pytanie = 0;
-    int nr_poprawna = 0;
+    int nr_pytania = 0;
 
     while(getline(quiz, linia)){
         switch (nr_linii){
-            case 1: dane_quiz[0] = linia; break;
-            case 2: dane_quiz[1] = linia; break;
-            case 3: case 9: case 15: case 21: case 27:{
-                pytania[nr_pytanie] = linia;
-                nr_pytanie++;
-                break;
-            }
-            case 8: case 14: case 20: case 26: case 32:{
-                poprawna[nr_poprawna] = linia;
-                nr_poprawna++;
-                break;
+            case 1: dane_quiz[0] = linia;                    break;
+            case 2: dane_quiz[1] = linia;                    break;
+            case 3: pytania[nr_pytania] = linia;             break;
+            case 4: odpowiedzA[nr_pytania] = linia;          break;
+            case 5: odpowiedzB[nr_pytania] = linia;          break;
+            case 6: odpowiedzC[nr_pytania] = linia;          break;
+            case 7: odpowiedzD[nr_pytania] = linia;          break;
+            case 8: poprawna[nr_pytania] = linia;            break;
             }
 
-        }
-
+        if(nr_linii==8){nr_linii=2; nr_pytania++;}
         nr_linii++;
-
-        if(nr_linii==4){
-            for(int i=0; i<4; i++){
-                odpowiedzi[0][i] = linia;
-                nr_linii++;
-            }
-        }
     }
+
+    quiz.close();
 
     cout << "Zagrajmy w gre..." << endl;
     Sleep(500);
@@ -58,11 +53,23 @@ int main()
     cout << dane_quiz[1] << endl;
 
     for(int i=0; i<5; i++){
-        cout << "Pytania: " << pytania[i] << endl;
-        cout << "Odpowiedzi: " << odpowiedzi[0][i] << endl;
-        cout << "Poprawna: " << poprawna[i] << endl;
+        cout << endl << pytania[i] << endl;
+        cout << "A. " << odpowiedzA[i] << endl;
+        cout << "B. " << odpowiedzB[i] << endl;
+        cout << "C. " << odpowiedzC[i] << endl;
+        cout << "D. " << odpowiedzD[i] << endl;
 
+        cout << "Twoja odpowiedz: "; cin >> odpowiedz;
+
+        transform(odpowiedz.begin(),odpowiedz.end(),odpowiedz.begin(), ::tolower);
+
+        if(odpowiedz==poprawna[i]){
+            cout << "Dobrze, zdobywasz punkt!" << endl;
+            punkty++;
+        }else cout << "Z³a odpowiedz, nie zdobywasz punktu! Poprawna odpowiedz to: " << poprawna[i] << endl;
     }
+
+    cout << endl << "Udalo Ci sie zdoobyæ: " << punkty << " PUNKTOW." << endl;
 
     return 0;
 }
