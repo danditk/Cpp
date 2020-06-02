@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1591125500 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_8\lancuchy\main.cpp
+	<iostream>
+	<string>
+
