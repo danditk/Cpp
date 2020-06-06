@@ -69,7 +69,7 @@ int main()
         }else cout << "Z³a odpowiedz, nie zdobywasz punktu! Poprawna odpowiedz to: " << poprawna[i] << endl;
     }
 
-    cout << endl << "Udalo Ci sie zdoobyæ: " << punkty << " PUNKTOW." << endl;
+    cout << endl << "Udalo Ci sie zdoobyc: " << punkty << " PUNKTOW." << endl;
 
     return 0;
 }

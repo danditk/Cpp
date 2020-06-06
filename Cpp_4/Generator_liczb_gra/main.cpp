@@ -14,9 +14,9 @@ int main()
 {
     srand(time(NULL)); //start-randomizeing ( pobierz czas od 1970 do teraz )
     liczba = (rand()%100)+1;
-    // ( przekazanie wartoœci do rand i wyci¹gniêcie reszty z dzielenia przez 100 [0..99 dodanie 1 -> 1>>100] )
-    //chc¹c utworzyæ liczbê z sakresu 57..75 -> liczba=(rand()%25) + 51
-    // pierwsza liczba jest zalezna od sekund, jest cykliczna, warto przetworzyæ funkcjê, aby zakryæ tê losowoœæ
+    // ( przekazanie wartosci do rand i wyciagniecie reszty z dzielenia przez 100 [0..99 dodanie 1 -> 1>>100] )
+    //chcac utworzyc liczbe z zakresu 50..75 -> liczba=(rand()%25) + 51
+    // pierwsza liczba jest zalezna od sekund, jest cykliczna, warto przetworzyc funkcje, aby zakryæ te losowoœæ
     //liczba = (rand()%100)+1;
     //cout << liczba << endl;
     cout << "Hello, wylosowalem liczbe, zgadnij jakaz to (1 - 100):";

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1591130246 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_7\odczyt_pliku\main.cpp
+	<iostream>
+	<fstream>
+	<cstdlib.h>
+
