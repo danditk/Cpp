@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -104,6 +105,10 @@ int random_range(int beg=1, int fin=10){
     return (rand1);
 }
 
-//int round(lvl){
+int round(lvl){
 
-//}
+    lvl++;
+    double x = (pow(10,lvl))-1;
+    random_range(,x);
+
+}

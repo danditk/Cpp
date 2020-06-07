@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1591535594 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\read_improvement_tull\valmet_help\test\main.cpp
+	<iostream>
+	<time.h>
+	<math.h>
+	<string>
+
