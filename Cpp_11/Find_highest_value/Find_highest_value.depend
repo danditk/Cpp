@@ -1,4 +1,5 @@
 # depslib dependency file v1.0
-1591729190 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_11\find_highest_value\main.cpp
+1591731278 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_11\find_highest_value\main.cpp
 	<iostream>
+	<string>
 

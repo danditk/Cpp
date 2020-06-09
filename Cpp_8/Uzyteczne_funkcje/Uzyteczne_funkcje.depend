@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1591130246 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_8\uzyteczne_funkcje\main.cpp
+	<iostream>
+	<string>
+	<algorithm>
+
