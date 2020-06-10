@@ -8,7 +8,6 @@ float srednia(float *tab, int ile){
 
     for(int i=0; i<ile; i++){
         suma+=*tab; // dodanie wartosci wszystkich el tablicy
-        *tab=999; // test czy funkcja moze zmienic argumenty tablicy, czy pracuje tylko na ich referencjach
         tab++; // inkrementecja numeru wskaznika
     }
 
@@ -16,27 +15,69 @@ float srednia(float *tab, int ile){
 }
 
 
-int ile;
+int ile=10;
+float avg, low, high, near;
+float liczby[10], wieksze[10], mniejsze[10];
+
+float roznica_0, roznica;
 
 int main()
 {
-    float avg;
-    cout << "Ile liczb w tablicy: ";
-    cin >> ile;
-
-    float *tablica; // nazwa wskaznika
-    tablica = new float [ile]; // nowy obszar w pamieci
-
+    cout << "Podaj 5 liczb po spacji:" << endl;
     for(int i=0; i<ile; i++){
-        cin >> *tablica;
-        avg = srednia(tablica,i+1);
-        cout << "wskaznik wartosc: " << *tablica << endl;
-        cout << "srednia wartosc: " << avg << endl;
-        tablica++;
+        cin >> liczby[i];
     }
 
-    delete [] tablica;
-    // na koniec usun tablice [] o nazwie tablica, konieczne czyszczenie pamieci
+    low = liczby[0];
+    high = liczby[0];
+
+    avg = srednia(liczby,ile);
+    cout << avg << endl;
+
+    for(int i=0; i<ile; i++){
+            cout << liczby[i] << endl;
+        if(liczby[i]<avg){
+            mniejsze[i]=liczby[i];
+            cout << "mniejsze od sredniej: " << mniejsze[i] << endl;
+        }else if(liczby[i]>avg){
+            wieksze[i]=liczby[i];
+            cout << "wieksze od sredniej: " << wieksze[i] << endl;
+        }else if (liczby[i]==avg){
+            near=liczby[i];
+            cout << "takie samo: " << near << endl;
+        }
+    }
+
+    cout << endl << endl;
+    cout << avg << endl;
+
+    roznica_0 = avg - mniejsze[0];
+    if (roznica_0 < 0) roznica_0*=-1; // abs(); - wartosc absolutna
+
+    for(int i=1; i<ile; i++){
+        roznica = avg - mniejsze[i];
+        if(roznica < 0) roznica*=-1;
+        if(roznica < roznica_0){
+            low = mniejsze[i];
+            roznica_0 = roznica;
+        }
+
+        cout << "low: " << low << endl;
+    }
+
+
+    roznica_0 = avg - wieksze[0];
+
+    for(int i=1; i<ile; i++){
+        roznica = avg - wieksze[i];
+        if(roznica < 0) roznica*=-1;
+        if(roznica < roznica_0){
+            high = wieksze[i];
+            roznica_0 = roznica;
+        }
+
+        cout << "high: " << high << endl;
+    }
 
 
 
