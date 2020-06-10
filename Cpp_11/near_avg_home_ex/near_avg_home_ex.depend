@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1591816782 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_11\near_avg_home_ex\main.cpp
+1591823018 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_11\near_avg_home_ex\main.cpp
 	<iostream>
 	<stdlib.h>
+	<cstdio>
 

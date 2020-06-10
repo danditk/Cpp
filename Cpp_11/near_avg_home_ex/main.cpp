@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <cstdio>
 
 using namespace std;
 
@@ -14,9 +15,14 @@ float srednia(float *tab, int ile){
     return suma/ile;
 }
 
+float absolutna(float x){
+    if(x < 0) x*=-1;
+    return x;
+}
 
-int ile=10;
-float avg, low, high, near;
+
+int ile=5;
+float avg, avg_abs, low, high, near;
 float liczby[10], wieksze[10], mniejsze[10];
 
 float roznica_0, roznica;
@@ -32,54 +38,95 @@ int main()
     high = liczby[0];
 
     avg = srednia(liczby,ile);
-    cout << avg << endl;
+    avg_abs = absolutna(avg);
+    //cout << "Srednia abs: " << avg_abs << endl;
 
     for(int i=0; i<ile; i++){
-            cout << liczby[i] << endl;
+            //cout << liczby[i] << endl;
         if(liczby[i]<avg){
             mniejsze[i]=liczby[i];
-            cout << "mniejsze od sredniej: " << mniejsze[i] << endl;
+            //cout << "mniejsze od sredniej: " << mniejsze[i] << endl;
         }else if(liczby[i]>avg){
             wieksze[i]=liczby[i];
-            cout << "wieksze od sredniej: " << wieksze[i] << endl;
+            //cout << "wieksze od sredniej: " << wieksze[i] << endl;
         }else if (liczby[i]==avg){
             near=liczby[i];
-            cout << "takie samo: " << near << endl;
+            //cout << "takie samo: " << near << endl;
         }
     }
 
-    cout << endl << endl;
-    cout << avg << endl;
+    //cout << endl << endl;
 
-    roznica_0 = avg - mniejsze[0];
-    if (roznica_0 < 0) roznica_0*=-1; // abs(); - wartosc absolutna
+    if(near){
+        cout << "Srednia to: " << avg << endl;
+        cout << "Najblizsza srednia wartosc to: " << near;
+        getchar(); getchar();
+        return 0;
+    }
+
+
+    //cout << "Srednia: " << avg << endl;
+
+    roznica_0 = avg_abs - liczby[0];
+    roznica_0 = absolutna(roznica_0);
+
+    for(int i=0; i<ile; i++){
+        roznica = avg_abs - liczby[i];
+        roznica = absolutna(roznica);
+        if(roznica < roznica_0){
+            near = liczby[i];
+            roznica_0 = roznica;
+        }
+    }
+
+/*
+
+    roznica_0 = avg_abs - mniejsze[0];
+    roznica_0 = absolutna(roznica_0);
+
+    //wyszukiwanie najblizszej sredniej liczby dolnej
 
     for(int i=1; i<ile; i++){
-        roznica = avg - mniejsze[i];
-        if(roznica < 0) roznica*=-1;
+        roznica = avg_abs - mniejsze[i];
+        roznica = absolutna(roznica);
         if(roznica < roznica_0){
             low = mniejsze[i];
             roznica_0 = roznica;
         }
 
-        cout << "low: " << low << endl;
+        //cout << "low: " << low << endl;
     }
 
 
-    roznica_0 = avg - wieksze[0];
+    roznica_0 = avg_abs - wieksze[0];
+    roznica_0 = absolutna(roznica_0);
+
+    //wyszukiwanie najblizszej sredniej liczby gornej
 
     for(int i=1; i<ile; i++){
-        roznica = avg - wieksze[i];
-        if(roznica < 0) roznica*=-1;
+        roznica = avg_abs - wieksze[i];
+        roznica = absolutna(roznica);
         if(roznica < roznica_0){
             high = wieksze[i];
             roznica_0 = roznica;
         }
 
-        cout << "high: " << high << endl;
+        //cout << "high: " << high << endl;
     }
 
 
+    roznica_0 = high - avg_abs;
+    roznica_0 = absolutna(roznica_0);
+
+    roznica = low - avg_abs;
+    roznica = absolutna(roznica);
+    if(roznica<roznica_0) near = low;
+    else near = high;
+*/
+
+    cout << "Srednia to: " << avg << endl;
+    cout << "Liczba najblizej sredniaj to: " << near << endl;
+    cout << "Liczby z gory i z dolu najblzej sredniej: " << high << " i " << low << endl;
 
     return 0;
 }
