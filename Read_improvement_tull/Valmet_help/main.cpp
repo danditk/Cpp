@@ -3,26 +3,23 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string>
-#include <fstream>
 #include <algorithm>
 #include <cmath>
+#include <fstream>
 
 using namespace std;
-
 
 int random_range(int beg, int fin);// deklaracja uzycia funkcji randomowych liczb
 //int round(lvl);
 
-
 int main()
 {
+
     int numbers_l[5][100]={
     { 26, 53, 74, 79, 82, 63, 91, 73, 22, 53, 36, 29, 66, 24, 25, 31, 46, 02, 13, 85, 72, 45, 62, 67, 50, 76, 23, 06, 40, 28, 96, 88, 77, 84, 45, 15, 21, 60, 83, 49, 99, 78, 58, 87, 18, 03},
     { 277, 833, 013, 736, 226, 129, 903, 271, 736, 713, 413, 908, 862, 832, 864, 865, 837, 747, 107, 251, 982, 825, 211, 267, 837, 108, 864, 825, 953, 425, 736, 490, 363, 646, 726, 411, 361, 508, 864, 956, 525, 737, 635, 737, 107, 747, 837, 215, 847, 880, 626, 103},
     { 8638, 7875, 1178, 2277, 7426, 7655, 7777, 5433, 7657 }
     }; //deklaracja tablicy liczb dla poziomu 0 i 1 etc...
-
-
 
 
     string user_text;
@@ -48,7 +45,7 @@ int main()
         }
 
         cout << number_show << endl; // wyswietl uzytkownikowi liczbe
-        Sleep(200); // odczekaj
+        Sleep(100); // odczekaj
         system("cls"); // wyczysc konsole
         cout << "Wpisz wyswietlona liczbe: "; getline(cin, user_text); // odbierz od uzytkownika
         transform(user_text.begin(), user_text.end(),user_text.begin(),::tolower);// zmiana tekstu usera na male literki
@@ -83,14 +80,8 @@ int main()
         if(user_text!="t") return false;
     }
 
-
-
-
     return 0;
 }
-
-
-
 
 
 int random_range(int beg=1, int fin=10){
@@ -105,10 +96,10 @@ int random_range(int beg=1, int fin=10){
     return (rand1);
 }
 
-int round(lvl){
 
-    lvl++;
-    double x = (pow(10,lvl))-1;
-    random_range(,x);
+int round(int l){
 
+    l++;
+    int x = (pow(10,l))-1;
+    return random_range(1,x);
 }
