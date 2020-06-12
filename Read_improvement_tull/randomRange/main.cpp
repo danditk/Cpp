@@ -9,7 +9,6 @@
 using namespace std;
 
 // Funkcje
-int random_range(int beg, int fin);// deklaracja uzycia funkcji randomowych liczb
 int thatManyDigits(int qty);
 
 // Zmienne
@@ -19,9 +18,12 @@ int numberQty, numberShow;
 
 int main()
 {
+
+    srand(time(NULL)); // zatrzymanie odliczania sekund zegara od 1070 roku
+
     while(userChoice != "end"){
 
-        cout << "Ilo cyfrowa liczbe wylosowac? :  " << endl;
+        cout << "Ilo cyfrowa liczbe wylosowac? :  ";
         getline(cin, userChoice);
         numberQty = atoi(userChoice.c_str());
 
@@ -34,19 +36,21 @@ int main()
     return 0;
 }
 
-int random_range(int beg=1, int fin=10){
-
-    int qty = fin-(beg+1); // ustalanie dlugosci ciagu zakresu liczbowego
-    srand(time(NULL)); // zatrzymanie odliczania sekund zegara od 1070 roku
-    int rands = rand()%qty+beg; // ustalenie przesunietego o jeden domyslnego zakresu liczb
-
-    return (rands);
-}
-
 
 int thatManyDigits(int qty=1){
+
     // qty - okresla ilo cyfrowa liczba ma zostac wylosowana
-    int x = pow(10,(qty-1));
-    int y = pow(10,qty)-1;
-    return random_range(x,y);
+    int x = pow(10,(qty));
+    int y = pow(10,qty+1)-1;
+
+    int maxi = (y-x)+1; // ustalanie dlugosci ciagu zakresu liczbowego
+    int rands[3]; // ustalenie przesunietego o jeden domyslnego zakresu liczb
+    //for(int i=0;i<10000;i++){
+        rands[1] = rand(); // ustalenie przesunietego o jeden domyslnego zakresu liczb
+        rands[2] = rand(); // ustalenie przesunietego o jeden domyslnego zakresu liczb
+   // }
+
+    rands[0]=(rands[1]*rands[2])%maxi+x;
+
+    return rands[0];
 }
