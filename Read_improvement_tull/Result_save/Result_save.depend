@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1591989580 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\read_improvement_tull\result_save\main.cpp
+	<iostream>
+	<fstream>
+
