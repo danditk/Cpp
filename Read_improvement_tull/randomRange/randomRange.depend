@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1592504836 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\read_improvement_tull\randomrange\main.cpp
+	<iostream>
+	<windows.h>
+	<time.h>
+	<stdlib.h>
+	<string>
+	<algorithm>
+	<cmath>
+

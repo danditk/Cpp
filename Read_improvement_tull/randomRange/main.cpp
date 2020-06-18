@@ -21,9 +21,9 @@ int main()
 
     srand(time(NULL)); // zatrzymanie odliczania sekund zegara od 1070 roku
 
-    while(userChoice != "end"){
+    while(userChoice != "end" || != "END"){
 
-        cout << "Ilo cyfrowa liczbe wylosowac? :  ";
+        //cout << "Jaki poziom Cie interesuje? :  ";
         getline(cin, userChoice);
         numberQty = atoi(userChoice.c_str());
 
