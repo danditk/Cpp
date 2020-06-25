@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1593113454 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_10\wskaüniki\wskazniki_next_sesion\main.cpp
+	<iostream>
+	<time.h>
+	<cstdlib>
+
