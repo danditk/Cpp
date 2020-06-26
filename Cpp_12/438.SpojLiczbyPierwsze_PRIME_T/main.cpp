@@ -2,23 +2,25 @@
 
 using namespace std;
 
-int n,x=0;
+long n=100000;
+int x=0,l;
 string text;
 
 int main()
 {
-    cin >> n;
     for(int i=1; i<n; i++){
-        for(int j=1; j<=i; j++){
-            if(i%j==0){
-                    x++;
+        cin>>l;
+        for(int k= 1; k<=l; k++){
+            for(int j=1; j<=k; j++){
+                if(k%j==0){
+                        x++;
+                }
             }
+            if(x!=2) text="NIE";
+            else text="TAK";
+            x=0;
         }
-        if(x!=2) text="NIE";
-        else text="TAK";
-        x=0;
         cout << text << endl;
-
     }
     return 0;
 }
