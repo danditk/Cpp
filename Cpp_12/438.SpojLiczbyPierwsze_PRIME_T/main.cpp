@@ -2,31 +2,26 @@
 
 using namespace std;
 
-int x=0,qty, l;
+int q, x;
 string text;
+
+bool czyPierwsza(int s){
+
+    if (s==1) return false;
+    for (int i=2; i<(s/2)+1; i++){
+        if(s%i==0) return false;
+    }
+    return true;
+}
 
 int main()
 {
-    cin >> qty;
-    long tab[qty];
-    for(int i=0; i<qty; i++) cin >> tab[i];
-
-    for(int i=0; i<qty; i++){
-        l = tab[i];
-        for(int k=1; k<=l; k++){
-            if(l>2 && l%2==0){
-                text="NIE";
-                break;
-            }
-            for(int j=1; j<=k; j++){
-                if(k%j==0) x++;
-                if(x>2) break;
-            }
-            if(x!=2) text="NIE";
-            else text="TAK";
-            x=0;
-        }
+    cin >> q;
+    for(int i=0; i<q; i++){
+        cin >> x;
+        text = czyPierwsza(x) == true ? "TAK" : "NIE";
         cout << text << endl;
     }
+
     return 0;
 }
