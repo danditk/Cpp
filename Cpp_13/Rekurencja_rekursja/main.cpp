@@ -2,6 +2,9 @@
 
 using namespace std;
 
+// Rekurencja - szybkoœæ kosztem wykorzystanej pamiêci
+
+
 /* // example 1.
 int f(int n){
     if (n==0) return 3;
@@ -9,13 +12,23 @@ int f(int n){
 }
 */
 
-int potegowanie (int p, int w){
+/* // Ex 2. Potêgowanie
+long potegowanie (int p, int w){
     if (w == 0) return 1;
     else return p * potegowanie(p,w-1);
 }
+*/
+
+
+// Ex 3. Ci¹g fibonacciego
+long fib (int n){
+    if (n == 2 || n == 1) return 1;
+    else return fib(n-1) + fib(n-2);
+}
+
 
 int main()
 {
-    cout << potegowanie(2,5) << endl;
+    cout << fib(8) << endl;
     return 0;
 }
