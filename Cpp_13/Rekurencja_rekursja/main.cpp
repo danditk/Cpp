@@ -19,16 +19,26 @@ long potegowanie (int p, int w){
 }
 */
 
-
+/*
 // Ex 3. Ci¹g fibonacciego
 long fib (int n){
     if (n == 2 || n == 1) return 1;
     else return fib(n-1) + fib(n-2);
 }
+*/
+
+
+// Ex 4. Silnia
+long sil (int n){
+    if (n == 0) return 1;
+    else return n * sil(n-1);
+}
+
+
 
 
 int main()
 {
-    cout << fib(8) << endl;
+    cout << sil(10) << endl;
     return 0;
 }
