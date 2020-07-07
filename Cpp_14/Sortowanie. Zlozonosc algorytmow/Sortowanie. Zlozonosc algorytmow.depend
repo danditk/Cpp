@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1594154790 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_14\sortowanie. zlozonosc algorytmow\main.cpp
+	<iostream>
+	<time.h>
+	<windows.h>
+
