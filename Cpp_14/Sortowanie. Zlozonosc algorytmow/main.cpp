@@ -11,7 +11,7 @@ double czas;
 void sortowanie_babelkowe(int *tab, int n){
     for(int i=1; i<n; i++){
         for(int j=n-1; j>=1; j--){
-            if(tab[j]<tab[j-1]){
+            if(tab[j]<tab[j-1]){ // zmiana znaku < na > powoduje sortowanie malej¹ce
                 int bufor; bufor = tab[j-1];
                 tab[j-1]=tab[j];
                 tab[j]=bufor;
@@ -51,7 +51,10 @@ int main()
     stop = clock();
     czas = (double)(stop-start)/CLOCKS_PER_SEC;
 
-
+    cout << "Po sortowaniu: ";
+    for(int i=0; i<ile; i++){
+        cout << tablica[i] << " ";
+    } cout << endl;
 
     delete [] tablica;
 
