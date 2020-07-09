@@ -59,11 +59,13 @@ int main()
     for(int i=0; i<ile; i++){
         tablica_copy[i]=tablica[i];
     }
-
+/*
     cout << "Przed sortowaniem: ";
     for(int i=0; i<ile; i++){
         cout << tablica[i] << " ";
     } cout << endl;
+*/ //testowanie czy istnieje tablica
+
 
     start = clock();
 
@@ -74,8 +76,8 @@ int main()
     stop = clock();
     czas = (double)(stop-start)/CLOCKS_PER_SEC;
 
-
     cout << endl << "Czas sortowania babelkowego: " << czas << "s" << endl;
+
 
     start = clock();
 
@@ -86,12 +88,12 @@ int main()
     stop = clock();
     czas = (double)(stop-start)/CLOCKS_PER_SEC;
 
+
     cout << "Po sortowaniu: ";
     for(int i=0; i<ile; i++){
         cout << tablica[i] << " ";
     } cout << endl;
-
-
+ // testowanie czy sortuje
 
     delete [] tablica;
     delete [] tablica_copy;
