@@ -26,8 +26,8 @@ void sortowanie_quicksort(int *tablica, int lewy, int prawy) {
     i=lewy;
     j=prawy;
     do{
-        while (tablica[i]<v) i++;
-        while (tablica[j]>v) j--;
+        while (tablica[i]<v) i++; // aby zmienic ascending na descending < / >
+        while (tablica[j]>v) j--; // aby zmienic ascending na descending < / >
         if (i<=j){
             x=tablica[i];
             tablica[i]=tablica[j];
@@ -88,12 +88,13 @@ int main()
     stop = clock();
     czas = (double)(stop-start)/CLOCKS_PER_SEC;
 
-
+    /*
     cout << "Po sortowaniu: ";
     for(int i=0; i<ile; i++){
-        cout << tablica[i] << " ";
+        cout << tablica_copy[i] << " ";
     } cout << endl;
- // testowanie czy sortuje
+    // testowanie czy sortuje
+    */
 
     delete [] tablica;
     delete [] tablica_copy;
