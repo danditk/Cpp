@@ -88,6 +88,8 @@ int main()
     stop = clock();
     czas = (double)(stop-start)/CLOCKS_PER_SEC;
 
+    cout << endl << "Czas sortowania quicksort: " << czas << "s" << endl;
+
     /*
     cout << "Po sortowaniu: ";
     for(int i=0; i<ile; i++){
