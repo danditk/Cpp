@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1601929842 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_16\struktury danych\3.lista\main.cpp
+	<iostream>
+	<list>
+	<windows.h>
+
