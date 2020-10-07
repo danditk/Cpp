@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1602056958 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_16\spoj_978.stos - stos\stos\main.cpp
+	<iostream>
+	<windows.h>
+
