@@ -4,7 +4,7 @@
 using namespace std;
 
 int dane[6];
-int rozmiar;
+int rozmiar=0;
 
 //------------------------------------------------------------------------
 

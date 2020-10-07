@@ -1,5 +1,4 @@
 #include <iostream>
-#include <windows.h>
 
 using namespace std;
 
@@ -15,17 +14,18 @@ int main()
 {
     while(true){
         cin >> wybor;
-
-        if(wybor=="+" && rozmiar<=10){
+        if(wybor=="+" && rozmiar>-1 && rozmiar<10){
             rozmiar++;
             cin >> dane[rozmiar];
             cout << ":)" <<endl;
         }else if(wybor=="-" && rozmiar>0){
-            rozmiar--;
             cout << dane[rozmiar] <<endl;
+            rozmiar--;
         }else{
         cout << ":(" <<endl;
+        return 0;
         }
+        if(rozmiar < 0) rozmiar = 0;
     };
     return 0;
 }
