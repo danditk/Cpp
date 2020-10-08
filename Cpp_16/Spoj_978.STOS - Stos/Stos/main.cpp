@@ -2,30 +2,37 @@
 
 using namespace std;
 
-string wybor;
-int dane[10];
-int rozmiar=0;
-
-
-//------------------------------------------------------------------------
-
-
-int main()
+int main ()
 {
-    while(true){
-        cin >> wybor;
-        if(wybor=="+" && rozmiar>-1 && rozmiar<10){
-            rozmiar++;
-            cin >> dane[rozmiar];
-            cout << ":)" <<endl;
-        }else if(wybor=="-" && rozmiar>0){
-            cout << dane[rozmiar] <<endl;
-            rozmiar--;
-        }else{
-        cout << ":(" <<endl;
-        return 0;
+    int stos[10];
+    char znak;
+    int liczba, licznik = 0;
+    while (true)
+    {
+        cin >> znak;
+        if (znak == '+')
+        {
+            cin >> liczba;
+            if (licznik <= 9)
+            {
+                stos[licznik] = liczba;
+                licznik++;
+                cout << ":)" << endl;
+            }
+            else
+                cout << ":(" << endl;
+
         }
-        if(rozmiar < 0) rozmiar = 0;
-    };
+        else if (znak == '-')
+        {
+            if (licznik >= 1)
+            {
+                licznik--;
+                cout << stos[licznik] << endl;
+            }
+            else
+                cout << ":(" << endl;
+        }
+    }
     return 0;
 }
