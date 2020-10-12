@@ -7,9 +7,8 @@ int main ()
     int stos[10];
     char znak;
     int liczba, licznik = 0;
-    while (true)
+    while (cin >> znak)
     {
-        cin >> znak;
         if (znak == '+')
         {
             cin >> liczba;
