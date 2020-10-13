@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1602620884 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_17\wyznaczanie pozycji - squart, cbrt, pow0,5\main.cpp
+	<iostream>
+	<math.h>
+
