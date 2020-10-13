@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1602619750 source:d:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_17\int_bite-potêgi-power\main.cpp
+	<iostream>
+	<math.h>
+	<iomanip>
+
