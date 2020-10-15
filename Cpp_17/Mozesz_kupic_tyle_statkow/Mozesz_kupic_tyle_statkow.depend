@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1602794315 source:e:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_17\mozesz_kupic_tyle_statkow\main.cpp
+	<iostream>
+	<windows.h>
+	<math.h>
+
