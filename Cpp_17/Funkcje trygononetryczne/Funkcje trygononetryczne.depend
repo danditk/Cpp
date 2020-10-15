@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1602781356 source:e:\dzialalnosc\it\server\htdocs\kursy\cpp\cpp_17\funkcje trygononetryczne\main.cpp
+	<iostream>
+	<math.h>
+
