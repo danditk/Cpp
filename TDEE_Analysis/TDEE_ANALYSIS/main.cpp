@@ -64,9 +64,11 @@ void wyswietl(int f_wiek, int f_BMI, int f_BMR, int f_TEF, int f_EAT, int f_NEAT
 
 // Deklaracja zmiennych
 int waga, wzrost, wiek, wsp_BMR, TEF=6;
-int BMI=0, BMR=0, TEF=0, EAT=0, NEAT=0, TDEE=0;
-int typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_wysoka;
-string plec;
+int BMI=0, BMR=0, TEF=0, EAT=0, TEA=0, EPOC=0, NEAT=0, TDEE=0;
+int kcal_sila, kcal_wyt_lekka, kcal_wyt_srednia, kcal_wyt_wysoka, TEA_sila, TEA_wyt, EPOC_sila_min, EPOC_sila_max, EPOC_wyt;
+int typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_wysoka, punkty;
+int trening_sily, trening_wyt_lekka, trening_wyt_srednia, trening_wyt_wysoka;
+string plec, obliczam_sam;
 
 int main()
 {
@@ -103,35 +105,92 @@ int main()
 
     cout << "Kolejny krok to ustalenie TEF, na potrzeby obliczen przyjmiemy 7%" << endl;
     Sleep(000);
-    cout << "Przystąpmy do obliczenia NEAT i EAT" << endl;
+    cout << "Przystąpmy do obliczenia NEAT i EAT[TEA + EPOC]" << endl;
     cout << "Wybiesz jedną z opcji, zatwierdź przyciskiem Enter" << endl;
     cout << "Sądze, ze jestem..." << endl;
-    cout << "1. Ektomorfikiem – Osoba: drobna, szczupła, długie kończyny, szybki metabolizm" << endl; – 700/900 kcal
-    cout << "2. mezomorfikiem –  Osoba: postawna, umięśniona, smukła, szerokie barki" << endl; – 400/500 kcal
-    cout << "3. endomorfikiem –  Osoba: przysadzista, z tendencją do tycia, wolny metabolizm" << endl; – 200/400 kcal
+    cout << "1. Ektomorfikiem –  Osoba: drobna, szczupła, długie kończyny, szybki metabolizm" << endl;
+    cout << "2. Mezomorfikiem –  Osoba: postawna, umięśniona, smukła, szerokie barki" << endl;
+    cout << "3. Endomorfikiem –  Osoba: przysadzista, z tendencją do tycia, wolny metabolizm" << endl;
     cout << "Wpisz liczbę od 1 do 3: "; cin >> typ_osoby;
 
     cout << endl;
-    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń siłowych..."
+    cout << "Czy wiesz ile kalorii spalasz w trakcie treningów?" << endl;
+    cout << "Odpowiedz tak[T], jeśli chcesz samodzielnie wpisać wartość spalanych kalorii" << endl;
+    cout << "( jeśli używasz do tego dokładnych przyżądów pomiarowych )" << endl;
+    cout << "Nie[N], jeśli chcesz, aby obliczył to program [T/N]: "; cin >> obliczam_sam;
+    if(obliczam_sam == "T" || obliczam_sam == "t" || obliczam_sam == "TAK" || obliczam_sam == "tak"){
+        cout << "Podczas tygodnia treningowego spalam średnio [kcal'i]..." << endl;
+        cout << "Wpisz ile tygodniowo spalasz [kcal]: "; cin >> TEA;
+    }
+
+    cout << endl;
+    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń siłowych..." << endl;
     cout << "Wpisz liczbę minut [0-840]: "; cin >> minut_sily;
+    cout << "To stanowi [ile] treningów siłowych w tygodniu..." << endl;
+    cout << "Wpisz ilość treningów siłowych: "; cin >> trening_sily;
 
     cout << endl;
-    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń wytrzymałościowych o intensywności lekkiej..."
+    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń wytrzymałościowych o intensywności lekkiej..." << endl;
     cout << "Wpisz liczbę minut w 50-65% HR MAX [0-5880]: "; cin >> minut_wyt_lekka;
+    cout << "Treningów o stricte takim chatakterze mam w tygodniu..." << endl;
+    cout << "Wpisz ilość treningów siłowych: "; cin >> trening_wyt_lekka;
 
     cout << endl;
-    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń wytrzymałościowych o intensywności średniej..."
+    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń wytrzymałościowych o intensywności średniej..." << endl;
     cout << "Wpisz liczbę minut w 66-80% HR MAX [0-3360]: "; cin >> minut_wyt_srednia;
+    cout << "Treningów o stricte takim chatakterze mam w tygodniu..." << endl;
+    cout << "Wpisz ilość treningów siłowych: "; cin >> trening_wyt_srednia;
 
     cout << endl;
-    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń wytrzymałościowych o intensywności wysokiej..."
+    cout << "Spędzam średnio [minut] dziennie podczas ćwiczeń wytrzymałościowych o intensywności wysokiej..." << endl;
     cout << "Wpisz liczbę minut w 81-100% HR MAX [0-560]: "; cin >> minut_wyt_wysoka;
+    cout << "Treningów o stricte takim chatakterze mam w tygodniu..." << endl;
+    cout << "Wpisz ilość treningów siłowych: "; cin >> trening_wyt_wysoka;
 
+    if(minut_sily>20) punkty++;
+    if(minut_wyt_lekka>150) punkty++;
+    if(minut_wyt_lekka>75) punkty++;
+    if(minut_wyt_lekka>5) punkty++;
 
-    if(odpowiedz == 1 ) NEAT = 750;
+    if(typ_osoby == 3){
+        if(punkty < 1) NEAT = 200;
+        else if(punkty >= 1) NEAT = 300;
+        else NEAT = 400;
+    }
 
+    if(typ_osoby == 2){
+        if(punkty < 2) NEAT = 400;
+        else NEAT = 500;
+    }
+
+    if(typ_osoby == 1){
+        if(punkty < 1) NEAT = 700;
+        else if(punkty >= 1) NEAT = 800;
+        else NEAT = 900;
+    }
+
+    kropki();
     wyswietl();
 
+    if(obliczam_sam == "N" || obliczam_sam == "n" || obliczam_sam == "NIE" || obliczam_sam == "nie"){
+
+        kcal_sila = 8*minut_sily;
+        TEA_sila = kcal_sila;
+
+        kcal_wyt_lekka = 5*minut_wyt_lekka;
+        kcal_wyt_srednia = 7*minut_wyt_srednia;
+        kcal_wyt_wysoka = 9*minut_wyt_wysoka;
+        TEA_wy = kcal_wyt_lekka+kcal_wyt_srednia+kcal_wyt_wysoka;
+        EPOC_wyt = BMR*0.04;
+    }
+
+        EAT = TEA + EPOC;
+
+
+    TDEE = BMR + TEF + EAT + NEAT;
+
+    EPOC_sila_min = TDEE*0.04;
+    EPOC_sila_max = TDEE*0.07;
 
     return 0;
 }
