@@ -54,7 +54,7 @@ void wyswietl(int f_wiek, int f_BMI, int f_BMR, int f_TEF, int f_EAT, int f_NEAT
 
     if(f_BMI>0) cout << parametr[0] << f_BMI << endl;
     if(f_BMR>0) cout << parametr[1] << f_BMR << endl;
-    if(f_TEF>0) cout << parametr[2] << f_TRF << endl;
+    if(f_TEF>0) cout << parametr[2] << f_TEF << endl;
     if(f_EAT>0) cout << parametr[3] << f_EAT << endl;
     if(f_NEAT>0) cout << parametr[4] << f_NEAT << endl;
     if(f_TDEE>0) cout << parametr[5] << f_TDEE << endl;
@@ -63,9 +63,9 @@ void wyswietl(int f_wiek, int f_BMI, int f_BMR, int f_TEF, int f_EAT, int f_NEAT
 }
 
 // Deklaracja zmiennych
-int waga, wzrost, wiek, wsp_BMR, TEF=6;
-int BMI=0, BMR=0, TEF=0, EAT=0, TEA=0, EPOC=0, NEAT=0, TDEE=0;
-int kcal_sila, kcal_wyt_lekka, kcal_wyt_srednia, kcal_wyt_wysoka, TEA_sila, TEA_wyt, EPOC_sila_min, EPOC_sila_max, EPOC_wyt;
+int waga, wzrost, wiek, wsp_BMR;
+float BMI=0, BMR=0, EAT=0, TEA=0, EPOC=0, NEAT=0, TDEE=0;
+float kcal_sila, kcal_wyt_lekka, kcal_wyt_srednia, kcal_wyt_wysoka, TEA_sila, TEA_wyt, EPOC_sila_min, EPOC_sila_max, EPOC_wyt;
 int typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_wysoka, punkty;
 int trening_sily, trening_wyt_lekka, trening_wyt_srednia, trening_wyt_wysoka;
 string plec, obliczam_sam;
@@ -104,6 +104,7 @@ int main()
     wyswietl(wiek, BMI, BMR, TEF, EAT, NEAT, TDEE);
 
     cout << "Kolejny krok to ustalenie TEF, na potrzeby obliczen przyjmiemy 7%" << endl;
+    TEF = 0.07;
     Sleep(000);
     cout << "Przystąpmy do obliczenia NEAT i EAT[TEA + EPOC]" << endl;
     cout << "Wybiesz jedną z opcji, zatwierdź przyciskiem Enter" << endl;
@@ -148,9 +149,9 @@ int main()
     cout << "Wpisz ilość treningów siłowych: "; cin >> trening_wyt_wysoka;
 
     if(minut_sily>20) punkty++;
-    if(minut_wyt_lekka>150) punkty++;
-    if(minut_wyt_lekka>75) punkty++;
-    if(minut_wyt_lekka>5) punkty++;
+    if(minut_wyt_lekka>120) punkty++;
+    if(minut_wyt_lekka>30) punkty++;
+    if(minut_wyt_lekka>3) punkty++;
 
     if(typ_osoby == 3){
         if(punkty < 1) NEAT = 200;
@@ -170,7 +171,7 @@ int main()
     }
 
     kropki();
-    wyswietl();
+    wyswietl(wiek, BMI, BMR, TEF, EAT, NEAT, TDEE);
 
     if(obliczam_sam == "N" || obliczam_sam == "n" || obliczam_sam == "NIE" || obliczam_sam == "nie"){
 
@@ -180,17 +181,24 @@ int main()
         kcal_wyt_lekka = 5*minut_wyt_lekka;
         kcal_wyt_srednia = 7*minut_wyt_srednia;
         kcal_wyt_wysoka = 9*minut_wyt_wysoka;
-        TEA_wy = kcal_wyt_lekka+kcal_wyt_srednia+kcal_wyt_wysoka;
-        EPOC_wyt = BMR*0.04;
+        TEA_wyt = kcal_wyt_lekka+kcal_wyt_srednia+kcal_wyt_wysoka;
+
+        TEA = TEA_sila+TEA_wyt;
     }
 
-        EAT = TEA + EPOC;
+    EPOC_wyt = trening_wyt_lekka*5+trening_wyt_srednia*35+trening_wyt_wysoka*180;
 
-
+    EPOC = EPOC_wyt;
+    EAT = TEA + EPOC;
     TDEE = BMR + TEF + EAT + NEAT;
+
+    kropki();
+    wyswietl(wiek, BMI, BMR, TEF, EAT, NEAT, TDEE);
 
     EPOC_sila_min = TDEE*0.04;
     EPOC_sila_max = TDEE*0.07;
+
+    EPOC =  EPOC_sila_min + EPOC_wyt;
 
     return 0;
 }
