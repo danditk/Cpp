@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//---------------------------------------------------------------------------------------------------------
 // Efekt oczekiwania
 void kropki(){
     for(int i=0; i<=15; i++){
@@ -15,8 +16,9 @@ void kropki(){
      system("cls");
 }
 
+//---------------------------------------------------------------------------------------------------------
 // Wyświetlanie obliczonych danych na czystym ekranie
-void wyswietl(int f_wiek, int f_BMI, int f_BMR, int f_TEF, int f_EAT, int f_NEAT, int f_TDEE){
+void wyswietl(int f_wiek, float f_BMI, float f_BMR, float f_TEF, float f_EAT, float f_NEAT, float f_TDEE){
 
     // Deklaracja tekstow
     string parametr[10], oBMI[10], wBMI[10];
@@ -62,13 +64,16 @@ void wyswietl(int f_wiek, int f_BMI, int f_BMR, int f_TEF, int f_EAT, int f_NEAT
     cout << endl;
 }
 
+//---------------------------------------------------------------------------------------------------------
 // Deklaracja zmiennych
-int waga, wzrost, wiek, wsp_BMR;
-float BMI=0, BMR=0, EAT=0, TEA=0, EPOC=0, NEAT=0, TDEE=0;
+int waga, wzrost, wiek, wsp_BMR, NEAT=0;
+float BMI=0, BMR=0, EAT=0, TEF, TEA=0.0, EPOC=0, TDEE=0;
 float kcal_sila, kcal_wyt_lekka, kcal_wyt_srednia, kcal_wyt_wysoka, TEA_sila, TEA_wyt, EPOC_sila_min, EPOC_sila_max, EPOC_wyt;
 int typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_wysoka, punkty;
 int trening_sily, trening_wyt_lekka, trening_wyt_srednia, trening_wyt_wysoka;
 string plec, obliczam_sam;
+
+//---------------------------------------------------------------------------------------------------------
 
 int main()
 {
@@ -87,6 +92,7 @@ int main()
     cout << "Wiek[lat]: "; cin >> wiek;
     cout << "Plec[K / M]: "; cin >> plec;
 
+    //.....................................................................................................
     // Wspolczynnik zalezny od plci
     if(plec == "K" || plec == "k") wsp_BMR = -161;
     else if(plec == "M" || plec == "m") wsp_BMR = +5;
@@ -97,6 +103,7 @@ int main()
         exit(0);
     }
 
+    //.....................................................................................................
     // Obliczanie BMR ze wzoru
     BMR = trunc((9.99*waga)+(6.25*wzrost)-(4.92*wiek)+wsp_BMR);
 
@@ -148,6 +155,7 @@ int main()
     cout << "Treningów o stricte takim chatakterze mam w tygodniu..." << endl;
     cout << "Wpisz ilość treningów siłowych: "; cin >> trening_wyt_wysoka;
 
+    //.....................................................................................................
     if(minut_sily>20) punkty++;
     if(minut_wyt_lekka>120) punkty++;
     if(minut_wyt_lekka>30) punkty++;
@@ -173,6 +181,7 @@ int main()
     kropki();
     wyswietl(wiek, BMI, BMR, TEF, EAT, NEAT, TDEE);
 
+    //.....................................................................................................
     if(obliczam_sam == "N" || obliczam_sam == "n" || obliczam_sam == "NIE" || obliczam_sam == "nie"){
 
         kcal_sila = 8*minut_sily;
@@ -186,6 +195,7 @@ int main()
         TEA = TEA_sila+TEA_wyt;
     }
 
+    //.....................................................................................................
     EPOC_wyt = trening_wyt_lekka*5+trening_wyt_srednia*35+trening_wyt_wysoka*180;
 
     EPOC = EPOC_wyt;
