@@ -1,7 +1,10 @@
 # depslib dependency file v1.0
-1602894122 source:e:\dzialalnosc\it\server\htdocs\kursy\cpp\tdee_analysis\tdee_analysis\main.cpp
+1603139683 source:e:\dzialalnosc\it\server\htdocs\kursy\cpp\tdee_analysis\tdee_analysis\main.cpp
 	<iostream>
+	<cstdlib>
 	<windows.h>
 	<cmath>
 	<cstdio>
+	<string>
+	<iomanip>
 
