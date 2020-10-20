@@ -4,6 +4,7 @@
 #include <cmath>
 #include <cstdio>
 #include <string>
+#include <algorithm>
 #include <iomanip>
 
 using namespace std;
@@ -68,7 +69,7 @@ int main()
         cout<<"[ W zale¾no˜cci od wieku ]"<<endl;            SetConsoleTextAttribute(uchwyt, 15);
         cout<<"  7.  Kasowanie pami¥ci                 ";    SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ By obliczy˜c dla innych parametr¢w ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  9.  Podzi¥kowania"<<endl;
+        cout<<"  9.  Podzi¥kowania! Objaśnienie wyników"<<endl;
         cout<<"  0.  Koniec programu "<<endl;
         cout<<"==================================================================================="<<endl;
         SetConsoleTextAttribute(uchwyt, 12);
@@ -143,7 +144,12 @@ int main()
             SetConsoleTextAttribute(uchwyt, 14);
             cout<<"======================================================================================="<<endl;
             cout<<"   Dzi©kuj© serdecznie za wsparcie i cierpliwo˜rcćo˜ci wszystkim wok¢ˆ mnie <3!"<<endl;
-            cout<<"   Prosz©, je˜cli to nie problem, o feedback"<<char(1)<<" Like, komenta«, subskrypcj©. Pozdrawiam serdecznie! - L4M"<<endl;
+            cout<<"   Prosz©, je˜cli to nie problem, o feedback"<<char(1)<<" Like, komenta«, subskrypcj©."<<endl;
+            cout<<"   W sprawie intrpretacji wyników odsyłam Cię do wpisu z dnia: 15 Października 2020r"<<endl;
+            cout<<"   Odchudzanie, diety. Jak skutecznie się odchudzać bez efektu jo-jo  na blogu:"<<endl;
+            cout<<"   https://lesserr4more.wordpress.com/"<<endl;
+            cout<<"   !Twoje ciało nie ma zbyt wiele tkanki tłuszczowej - wskaźnik BMI nie jest dla Ciebie!"<<endl;
+            cout<<"   Pozdrawiam serdecznie! - L4M"<<endl;
             cout<<"======================================================================================="<<endl<<endl;
             SetConsoleTextAttribute(uchwyt, 15);
             system("pause");
@@ -195,11 +201,11 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
 
     if(f_etap >0){
         parametr[0]="Twoje BMI jest r¢wne:  ";
-        parametr[1]="Twoje BMR jest r¢wne:  ";
-        parametr[2]="Twoje TEF jest r¢wne:  ";
-        parametr[3]="Twoje EAT jest r¢wne:  ";
-        parametr[4]="Twoje NEAT jest r¢wne: ";
-        parametr[5]="Twoje TDEE to:         ";
+        parametr[1]="Twoje BMR jest r¢wne [kcal]:  ";
+        parametr[2]="Twoje TEF jest r¢wne [kcal]:  ";
+        parametr[3]="Twoje EAT jest r¢wne [kcal]:  ";
+        parametr[4]="Twoje NEAT jest r¢wne [kcal]: ";
+        parametr[5]="Twoje TDEE to [kcal]:         ";
 
         oBMI1[0]="         Klasyfikacja masy ciaˆa os¢b dorosˆych na podstawie BMI            ";
         oBMI1[1]="Wygˆodzenie                        |  BMI < 16,0      |  Waga ciaˆa: niedowaga";
@@ -256,28 +262,37 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
             BMI_min = 24.0;
             BMI_max = 29.0;
         }
-        if(f_etap > 1 && f_wiek >= 19){
-            cout << parametr[0] << " " << f_BMI;
-                 if(f_BMI < 16){                      parametr[6] = " - " + oBMI1[1]; parametr[7] = oBMI2[1]; grupa1 = 1;}
-            else if(f_BMI > 16.0 && f_BMI < 16.99){   parametr[6] = " - " + oBMI1[2]; parametr[7] = oBMI2[2]; grupa1 = 2;}
-            else if(f_BMI > 17.0 && f_BMI < 18.49){   parametr[6] = " - " + oBMI1[3]; parametr[7] = oBMI2[3]; grupa1 = 3;}
-            else if(f_BMI > 18.5 && f_BMI < 24.99){   parametr[6] = " - " + oBMI1[4]; parametr[7] = oBMI2[4]; grupa1 = 4;}
-            else if(f_BMI > 25.0 && f_BMI < 29.99){   parametr[6] = " - " + oBMI1[5]; parametr[7] = oBMI2[5]; grupa1 = 5;}
-            else if(f_BMI > 30.0 && f_BMI < 34.99){   parametr[6] = " - " + oBMI1[6]; parametr[7] = oBMI2[6]; grupa1 = 6;}
-            else if(f_BMI > 35.0 && f_BMI < 39.99){   parametr[6] = " - " + oBMI1[7]; parametr[7] = oBMI2[7]; grupa1 = 7;}
-            else if(f_BMI >= 40.0){                   parametr[6] = " - " + oBMI1[8]; parametr[7] = oBMI2[8]; grupa1 = 9;}
-                 if((f_BMI-BMI_min)<1) parametr[8] = "Niebezpoecznie zbli¾asz si© do dolnej granicy Twojej wagi";
-                 if((BMI_max-f_BMI)<1) parametr[8] = "Niebezpoecznie zbli¾asz si© do g¢rnej granicy Twojej wagi";
+        if((f_etap==1 || f_etap==3 || f_etap==4)  && f_wiek >= 19){
+            cout << parametr[0] << " " << f_BMI << ", co można rozumieć jako -" << endl;
+                 if(f_BMI < 16){                      parametr[6] = oBMI1[1]; parametr[7] = oBMI2[1]; grupa1 = 1;}
+            else if(f_BMI >= 16.0 && f_BMI <= 16.99){   parametr[6] = oBMI1[2]; parametr[7] = oBMI2[2]; grupa1 = 2;}
+            else if(f_BMI >= 17.0 && f_BMI <= 18.49){   parametr[6] = oBMI1[3]; parametr[7] = oBMI2[3]; grupa1 = 3;}
+            else if(f_BMI >= 18.5 && f_BMI <= 24.99){   parametr[6] = oBMI1[4]; parametr[7] = oBMI2[4]; grupa1 = 4;}
+            else if(f_BMI >= 25.0 && f_BMI <= 29.99){   parametr[6] = oBMI1[5]; parametr[7] = oBMI2[5]; grupa1 = 5;}
+            else if(f_BMI >= 30.0 && f_BMI <= 34.99){   parametr[6] = oBMI1[6]; parametr[7] = oBMI2[6]; grupa1 = 6;}
+            else if(f_BMI >= 35.0 && f_BMI <= 39.99){   parametr[6] = oBMI1[7]; parametr[7] = oBMI2[7]; grupa1 = 7;}
+            else if(f_BMI >= 40.0){                   parametr[6] = oBMI1[8]; parametr[7] = oBMI2[8]; grupa1 = 9;}
+ /*
+                 if((BMI_min-xxxxxxxxxxxxxxxxf_BMI)<=1 && (BMI_min-f_BMI)>0.1){
+                        parametr[8] = "Zbli¾asz si© do dolnej granicy odpowiedniego dla Ciebie BMI. Zachowaj ostrożność.";
+                 }
+                 if((BMI_maxxxxxxxxxxxxxxxxxx-f_BMI)<=1 && (BMI_max-f_BMI)<0.1){
+                        parametr[8] = "Zbli¾asz si© do g¢rnej granicy odpowiedniego dla Ciebie BMI. Zachowaj ostrożność.";
+                        }
+*/
             cout << parametr[6] << endl << parametr[7]<< endl << parametr[8]           <<   endl;
+            cout << "Optymalne BMI w Twoim wieku to: " << BMI_min << " - " << BMI_max   <<   endl;
+
         }else if(f_etap != 10 && f_etap != 11){
             grupa1 = 0; grupa2 = 0;
             parametr[0] = wBMI[1];
+            cout << parametr[0] << endl;
         }
     }
 
     cout << setprecision(5);
 
-    if(f_etap>1 && f_BMR>0) cout << parametr[1] << trunc(f_BMR)                    <<   endl;
+    if((f_etap==2 || f_etap==3 || f_etap==4) && f_BMR>0) cout << parametr[1] << trunc(f_BMR)                    <<   endl;
     if(f_etap>2 && f_TEF>0) cout << parametr[2] << trunc(f_TEF*100)         << "%" <<   endl;
     if(f_etap>3 && f_NEAT>0)cout << parametr[4] << f_NEAT                          <<   endl;
     if(f_etap>4){
@@ -341,7 +356,7 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
 // Obliczanie BMI ze wzoru
 float obliczBMI(float f_waga, float f_wzrost){
     kropki();
-    return(ceil(f_waga/pow((f_wzrost/100),2)));
+    return((round(100*f_waga/pow(f_wzrost/100,2)))/100);
 }
 
 
@@ -390,14 +405,18 @@ string    trenuje, obliczam_sam;
 
     cout << endl;
     cout << "Czy uprawiasz regularnie aktywno˜† fizyczn¥?"                                      << endl;
-    cout << "Odpowied« [T/N]: ";                                                            cin >> obliczam_sam;
-    if(trenuje == "T" || trenuje == "t" || trenuje == "TAK" || trenuje == "tak"){
+    cout << "Odpowied« [T/N]: ";                                                            cin >> trenuje;
+    transform(trenuje.begin(), trenuje.end(), trenuje.begin(),::tolower);
+
+    if(trenuje == "t" || trenuje == "tak"){
         cout << endl;
         cout << "Czy wiesz ile ˜rednio kalorii spalasz dziennie w trakcie aktywno˜ci?"              << endl;
         cout << "Odpowiedz tak[T], je˜li chcesz samodzielnie wprowadzi† ˜redni¥ warto˜†"            << endl;
         cout << " spalanych kalorii ( je˜li u¾ywasz do tego dokˆadnych przy¾¥d¢w pomiarowych )"     << endl;
         cout << "Nie[N], je˜li chcesz, aby obliczyˆ to program [T/N]: ";                        cin >> obliczam_sam;
-        if(obliczam_sam == "T" || obliczam_sam == "t" || obliczam_sam == "TAK" || obliczam_sam == "tak"){
+
+    transform(obliczam_sam.begin(), obliczam_sam.end(), obliczam_sam.begin(),::tolower);
+    if(obliczam_sam == "t" || obliczam_sam == "tak"){
             cout << "Podczas tygodnia treningowego spalam dziennie ˜rednio [kcal'i]..."             << endl;
             cout << "Wpisz ile ˜rednio dziennie spalasz [kcal]: ";                              cin >> TEA;
         }
