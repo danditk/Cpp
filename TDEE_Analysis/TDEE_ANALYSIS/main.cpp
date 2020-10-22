@@ -10,6 +10,7 @@
 using namespace std;
 
 void kropki();
+void blad();
 void wyswietl(int, float, int, float, float, float, float, float);
 // Obliczenia
 float obliczBMI(float, float);
@@ -42,7 +43,6 @@ int main()
 
     while(wybor_w_menu!=0)
     {
-        rozmiarOkna(90,40);
         SetConsoleTextAttribute(uchwyt, 15);//ZMIEN KOLOR NA NR 15=WHITE
         //MAIN MENU
         system("cls");
@@ -55,17 +55,17 @@ int main()
         cout<<"                          Wybierz jedną z opcji "<<char(2)<<endl;
         SetConsoleTextAttribute(uchwyt, 15);
         cout<<"==================================================================================="<<endl;
-        cout<<"  1.  Obliczanie wska«nika masy ciaˆa ";    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<" [ BMI ]"<<endl;                              SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  2.  Podstawowa przemiana materii       ";    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"  1.  Obliczanie wska«nika masy ciaˆa ";     SetConsoleTextAttribute(uchwyt, 11);
+        cout<<" [ BMI ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  2.  Podstawowa przemiana materii       ";  SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ BMR (PPM) ]"<<endl;                        SetConsoleTextAttribute(uchwyt, 15);
         cout<<"  3.  Szczeg¢ˆowa analiza kaloryki     ";    SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ TDEE ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
         cout<<"  4.  Szczeg¢ˆowa analiza kaloryki     ";    SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ TDEE ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  5.  Wy˜cwietlanie przedziaˆ¢w BMI   ";    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"  5.  Wy˜cwietlanie przedziaˆ¢w BMI   ";      SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ Klasyfikacja BMI og¢lna ]"<<endl;          SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  6.  Wy˜cwietlanie przedziaˆ¢w BMI   ";    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"  6.  Wy˜cwietlanie przedziaˆ¢w BMI   ";      SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ W zale¾no˜cci od wieku ]"<<endl;            SetConsoleTextAttribute(uchwyt, 15);
         cout<<"  7.  Kasowanie pami¥ci                 ";    SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ By obliczy˜c dla innych parametr¢w ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
@@ -106,21 +106,24 @@ int main()
 
         }
         switch(wybor_w_menu){
-            case 1:
-            {
+            case 1: {
                 BMI = obliczBMI(waga,wzrost);
                 wyswietl(1, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
-            case 2:
-            {
+            case 2: {
                 BMR = obliczBMR(plec,waga,wzrost,wiek);
                 wyswietl(2, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
             //case 3: if(BMI==0) obliczBMI(waga,wzrost); obliczTDEEsimple(); wyswietl(5, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); break;
-            case 4: {if(BMI==0) BMI = obliczBMI(waga,wzrost); TDEE = obliczTDEEfull(BMR, wiek); wyswietl(5, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);} break;
-                system("pause");
+            case 4: {
+                if(BMR==0) BMR = obliczBMR(plec,waga,wzrost,wiek);
+                Sleep(1500);
+                TDEE = obliczTDEEfull(BMR, wiek);
+                wyswietl(2, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
+                wyswietl(5, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
+            }break;
             case 5: {wyswietl(10, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
             case 6: {wyswietl(11, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
             case 7:
@@ -154,16 +157,7 @@ int main()
             SetConsoleTextAttribute(uchwyt, 15);
             system("pause");
         }
-        else if (zlaopcja==true) //NIEPOPRAWNA OPCJA W MENU
-        {
-            cout<<endl;
-            SetConsoleTextAttribute(uchwyt, 12);
-            cout<<"==============================================================================="<<endl;
-            cout<<"                         Nie ma takiej opcji w menu!"<<endl;
-            cout<<"==============================================================================="<<endl<<endl;
-            SetConsoleTextAttribute(uchwyt, 15);
-            system("pause");
-        }
+        else if (zlaopcja==true) blad();//NIEPOPRAWNA OPCJA W MENU
     }
 
     return 0;
@@ -172,7 +166,15 @@ int main()
 //---------------------------------------------------------------------------------------------------------
 // Funkcje programu
 //---------------------------------------------------------------------------------------------------------
-
+void blad(){
+            cout<<endl;
+            SetConsoleTextAttribute(uchwyt, 12);
+            cout<<"==============================================================================="<<endl;
+            cout<<"                    Nie ma takiej opcji, spróbuj ponownie!"<<endl;
+            cout<<"==============================================================================="<<endl<<endl;
+            SetConsoleTextAttribute(uchwyt, 15);
+            system("pause");
+}
 //---------------------------------------------------------------------------------------------------------
 // Efekt oczekiwania
 void kropki(){
@@ -233,7 +235,7 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
     wBMI[6]="                  Wiek: 55 - 64 lata     -     BMI: 23 - 28                        ";
     wBMI[7]="                  Wiek: ponad 64 lata    -     BMI: 24 - 29                        ";
 
-    //Uchwyt do zmiany czciąki w konsoli
+    //Uchwyt do zmiany czcionki w konsoli
     HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
 
     switch(f_etap){
@@ -317,7 +319,6 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
         }
     }break;
     case 10:{
-        rozmiarOkna(160,400);
         int i=0;
         while(i<9){
             if(i==0){
@@ -330,10 +331,8 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
             i++;
             cout << oBMI1[i] << oBMI2[i] << endl;
         }
-        rozmiarOkna(90,40);
     }break;
     case 11:{
-        rozmiarOkna(160,400);
         int i=0;
         while(i<9){
             if(i==0){
@@ -347,9 +346,7 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
             if(i!=1) cout << wBMI[i]  << endl;
         }
         system("pause");
-        rozmiarOkna(90,40);
     }break;
-
     }
 }
 
@@ -369,11 +366,7 @@ float obliczBMR(string f_plec, float f_waga, float f_wzrost, float f_wiek){
     int wsp_BMR;
     if(f_plec == "K" || f_plec == "k")      wsp_BMR = -161;
     else if(f_plec == "M" || f_plec == "m") wsp_BMR = +5;
-    else{
-        cout << "Nieprawidłowo wprowadzona płeć!" << endl;
-        cout << "Sprobuj ponownie ;)" << endl;
-        kropki();
-    }
+    else blad();
 
     kropki();
     return(trunc((9.99*f_waga)+(6.25*f_wzrost)-(4.92*f_wiek)+wsp_BMR));
@@ -393,7 +386,7 @@ string    trenuje, obliczam_sam;
     kropki();
     TEF = 0.07;
     cout << "Pierwszy krok, poza BMR, to zaˆo¾enie TEF. Na potrzeby naszych obliczeä przyjmiemy "<< trunc(TEF*100) << "%" << endl;
-    Sleep(3000);
+    Sleep(1500);
     wyswietl(3, f_wiek, NEAT, BMI, f_BMR, TEF, EAT, TDEE);
 
     cout << "Teraz obliczymy NEAT i EAT [TEA + EPOC]"                                           << endl;
@@ -413,59 +406,50 @@ string    trenuje, obliczam_sam;
         cout << endl;
         cout << "Czy wiesz ile ˜rednio kalorii spalasz dziennie w trakcie aktywno˜ci?"              << endl;
         cout << "Odpowiedz tak[T], je˜li chcesz samodzielnie wprowadzi† ˜redni¥ warto˜†"             << endl;
-        cout << " spalanych kalorii ( je˜li u¾ywasz do tego dokˆadnych przy¾¥d¢w pomiarowych )"    << endl;
+        cout << "spalanych kalorii ( je˜li u¾ywasz do tego dokˆadnych przy¾¥d¢w pomiarowych )"    << endl;
         cout << "Nie[N], je˜li chcesz, aby obliczyˆ to program [T/N]: ";                        cin >> obliczam_sam;
     }
 
     transform(obliczam_sam.begin(), obliczam_sam.end(), obliczam_sam.begin(),::tolower);
     if(obliczam_sam == "t" || obliczam_sam == "tak"){
-            cout << "Podczas tygodnia treningowego spalam dziennie ˜rednio [kcal'i]..."             << endl;
-            cout << "Wpisz ile ˜rednio dziennie spalasz [kcal]: ";                              cin >> TEA;
-            cout << "Wpisz ilo˜† trening¢w siˆowych: ";                                             cin >> trening_sily;
-            cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci lekkiej: ";             cin >> trening_wyt_lekka;
-            cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci ˜redniej: ";            cin >> trening_wyt_srednia;
-            cout << "Wpisz ilo˜† trening¢w  wytrzymaˆo˜ciowych intensywno˜ci wysokiej: ";            cin >> trening_wyt_wysoka;
-    }
-    if(obliczam_sam == "n" || obliczam_sam == "nie"){
+        cout << "Podczas tygodnia treningowego spalam dziennie ˜rednio [kcal'i]..."             << endl;
+        cout << "Wpisz ile ˜rednio dziennie spalasz [kcal]: ";                              cin >> TEA;
+        cout << "Wpisz ilo˜† trening¢w siˆowych: ";                                             cin >> trening_sily;
+        cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci lekkiej: ";             cin >> trening_wyt_lekka;
+        cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci ˜redniej: ";            cin >> trening_wyt_srednia;
+        cout << "Wpisz ilo˜† trening¢w  wytrzymaˆo˜ciowych intensywno˜ci wysokiej: ";            cin >> trening_wyt_wysoka;
+    }else if(obliczam_sam == "n" || obliczam_sam == "nie"){
         cout << endl;
-        if(TEA!=0){ // Je˜li u¾ytkownik wpisaˆ liczb©, nie trzeba oblicza† TEA -> nie zadajemy tych pytaä
-            cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä siˆowych..."                  << endl;
-            cout << "Wpisz liczb© minut [0-840]: ";                                             cin >> minut_sily;
-            cout << "To stanowi [ile] trening¢w siˆowych w tygodniu..."                             << endl;
-        }
+        cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä siˆowych..."                  << endl;
+        cout << "Wpisz liczb© minut [0-840]: ";                                             cin >> minut_sily;
+        cout << "To stanowi [ile] trening¢w siˆowych w tygodniu..."                             << endl;
         cout << "Wpisz ilo˜† trening¢w siˆowych: ";                                             cin >> trening_sily;
 
         cout << endl;
-        if(TEA!=0){ // Je˜li u¾ytkownik wpisaˆ liczb©, nie trzeba oblicza† TEA -> nie zadajemy tych pytaä
         cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä wytrzymaˆo˜ciowych o intensywno˜ci lekkiej..." << endl;
         cout << "Wpisz liczb© minut w 50-65% HR MAX [0-5880]: ";                                cin >> minut_wyt_lekka;
         cout << "Trening¢w o stricte takim chatakterze mam w tygodniu..."                           << endl;
-        }
         cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci lekkiej: ";             cin >> trening_wyt_lekka;
 
         cout << endl;
-        if(TEA!=0){ // Je˜li u¾ytkownik wpisaˆ liczb©, nie trzeba oblicza† TEA -> nie zadajemy tych pytaä
         cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä wytrzymaˆo˜ciowych o intensywno˜ci ˜redniej..." << endl;
         cout << "Wpisz liczb© minut w 66-80% HR MAX [0-3360]: ";                                cin >> minut_wyt_srednia;
         cout << "Trening¢w o stricte takim chatakterze mam w tygodniu..."                           << endl;
-        }
         cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci ˜redniej: ";            cin >> trening_wyt_srednia;
 
         cout << endl;
-        if(TEA!=0){ // Je˜li u¾ytkownik wpisaˆ liczb©, nie trzeba oblicza† TEA -> nie zadajemy tych pytaä
         cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä wytrzymaˆo˜ciowych o intensywno˜ci wysokiej..." << endl;
         cout << "Wpisz liczb© minut w 81-100% HR MAX [0-560]: ";                                cin >> minut_wyt_wysoka;
         cout << "Trening¢w o stricte takim chatakterze mam w tygodniu..."                           << endl;
-        }
         cout << "Wpisz ilo˜† trening¢w  wytrzymaˆo˜ciowych intensywno˜ci wysokiej: ";            cin >> trening_wyt_wysoka;
 
-    }
     //.....................................................................................................
         if(trening_sily     >1  || minut_sily       >20)    punkty++;
         if(trening_wyt_lekka>2  || minut_wyt_lekka  >120)   punkty++;
         if(trening_wyt_lekka>1  || minut_wyt_srednia>30)    punkty++;
         if(trening_wyt_lekka>0  || minut_wyt_wysoka >3)     punkty++;
-    else TEA=0;
+
+    }
 
     if(typ_osoby == 3){
         if(punkty < 1)      NEAT = 200;
@@ -485,62 +469,66 @@ string    trenuje, obliczam_sam;
     }
 
     kropki();
+    wyswietl(2, f_wiek, NEAT, BMI, f_BMR, TEF, EAT, TDEE);
     wyswietl(4, f_wiek, NEAT, BMI, f_BMR, TEF, EAT, TDEE);
 
     //.....................................................................................................
 
-    if((trenuje == "T" || trenuje == "t" || trenuje == "TAK" || trenuje == "tak")  && (obliczam_sam == "N" || obliczam_sam == "n" || obliczam_sam == "NIE" || obliczam_sam == "nie")){
+    if(trenuje == "t" || trenuje == "tak"){
+            if((obliczam_sam == "n" || obliczam_sam == "nie")){
+                kcal_sila   = 8*minut_sily;
+                TEA_sila    = trunc(kcal_sila);
 
-        kcal_sila   = 8*minut_sily;
-        TEA_sila    = trunc(kcal_sila);
+                kcal_wyt_lekka      = 5*minut_wyt_lekka;
+                kcal_wyt_srednia    = 7*minut_wyt_srednia;
+                kcal_wyt_wysoka     = 9*minut_wyt_wysoka;
+                TEA_wyt             = trunc(kcal_wyt_lekka+kcal_wyt_srednia+kcal_wyt_wysoka);
 
-        kcal_wyt_lekka      = 5*minut_wyt_lekka;
-        kcal_wyt_srednia    = 7*minut_wyt_srednia;
-        kcal_wyt_wysoka     = 9*minut_wyt_wysoka;
-        TEA_wyt             = trunc(kcal_wyt_lekka+kcal_wyt_srednia+kcal_wyt_wysoka);
+                TEA = TEA_sila+TEA_wyt;
 
-        TEA = TEA_sila+TEA_wyt;
+                cout << setprecision(5);
+                cout << "TEA trening siˆa:               " << trunc(TEA_sila) << endl;
+                Sleep(1500);
+                cout << "TEA trening wytrzymaˆo˜c:     " << trunc(TEA_wyt) << endl;
+                Sleep(1500);
+                cout << "W sumie TEA:                   " << trunc(TEA) << endl;
+                Sleep(1500);
+            }
+        //.....................................................................................................
 
-        cout << setprecision(5);
-        cout << "TEA trening siˆa:               " << trunc(TEA_sila) << endl;
-        Sleep(1500);
-        cout << "TEA trening wytrzymaˆo˜c:     " << trunc(TEA_wyt) << endl;
-        Sleep(1500);
-        cout << "W sumie TEA:                   " << trunc(TEA) << endl;
-        Sleep(1500);
-    }
-
-    //.....................................................................................................
-
-    if(trenuje == "T" || trenuje == "t" || trenuje == "TAK" || trenuje == "tak"){
         EPOC_wyt = trunc(trening_wyt_lekka*5+trening_wyt_srednia*35+trening_wyt_wysoka*180);
 
         EPOC    = EPOC_wyt;
-        EAT     = TEA + EPOC;
-        TDEE    = f_BMR + TEF + EAT + NEAT;
 
         EPOC_sila_min = trunc(TDEE*0.04);
         EPOC_sila_max = trunc(TDEE*0.07);
 
         EPOC =  EPOC_sila_min + EPOC_wyt;
-
-        cout << "Min. EPOC trening siˆa:        " << trunc(EPOC_sila_min) << endl;
-        cout << "Max. EPOC trening siˆa:        " << trunc(EPOC_sila_max) << endl;
-        Sleep(1500);
         cout << "EPOC trening wytrzymaˆo˜c:     " << trunc(EPOC_wyt) << endl;
         Sleep(1500);
         cout << "W sumie EPOC:                   " << trunc(EPOC) << endl;
         Sleep(1500);
     }
-    cout << "EAT  = TEA + EPOC               " << trunc(EPOC) << endl;
+
+    EAT     = TEA + EPOC;
+    TDEE    = f_BMR + TEF + EAT + NEAT;
+
+    if(obliczam_sam=="n" || obliczam_sam=="nie"){
+        cout << "Min. EPOC trening siˆa:        " << EPOC_sila_min << endl;
+        cout << "Max. EPOC trening siˆa:        " << EPOC_sila_max << endl;
+        Sleep(1500);
+    }
+
+    cout << "EAT  = TEA + EPOC             =  " << EPOC << endl;
     Sleep(1500);
-    cout << "TDEE = BMR + TEF + EAT + NEAT   " << trunc(TDEE) << endl;
+    cout << "TDEE = BMR + TEF + EAT + NEAT =  " << TDEE << endl;
 
     system("pause");
 
     return(TDEE);
 }
 
+/*
 void rozmiarOkna(int x_s, int y_s){
     //Uchwyt do zmiany czciąki w konsoli
     HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -555,7 +543,7 @@ void rozmiarOkna(int x_s, int y_s){
     sr.Bottom = c2.Y-1; // wysokość o 1 mniejsza od bufora
     SetConsoleWindowInfo(uchwyt,true,&sr); // ustawia rozmiar okna (jednostka to szerokość i wysokość pojedynczego znaku)
 }
-
+*/
 
 
 /*
