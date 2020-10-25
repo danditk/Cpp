@@ -16,6 +16,7 @@ void wyswietl(int, float, int, float, float, float, float, float);
 float obliczBMI(float, float);
 float obliczBMR(string , float , float , float);
 float obliczTDEEfull(float, float);
+float obliczTDEElight(float);
 void rozmiarOkna(int, int);
 
 
@@ -48,32 +49,32 @@ int main()
         system("cls");
         cout<<"==================================================================================="<<endl;
         SetConsoleTextAttribute(uchwyt, 14);//ZMIEN KOLOR NA NR 14=YELLOW
-        cout<<"                Obliczanie zapotrzebowania kalorycznego "<<endl;
+        cout<<"                      Obliczanie zapotrzebowania kalorycznego  "<<endl;
         SetConsoleTextAttribute(uchwyt, 15);//PRZYWROC KOLOR BIALY
         cout<<"==================================================================================="<<endl;
         SetConsoleTextAttribute(uchwyt, 12);
-        cout<<"                          Wybierz jedną z opcji "<<char(2)<<endl;
+        cout<<"                              Wybierz jedną z opcji "<<char(25)<<endl;
         SetConsoleTextAttribute(uchwyt, 15);
         cout<<"==================================================================================="<<endl;
-        cout<<"  1.  Obliczanie wska«nika masy ciaˆa ";     SetConsoleTextAttribute(uchwyt, 11);
-        cout<<" [ BMI ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  2.  Podstawowa przemiana materii       ";  SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"  1.  Obliczanie wskaźnika masy ciała   "<<char(16);     SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"[ BMI ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  2.  Podstawowa przemiana materii        "<<char(16);  SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ BMR (PPM) ]"<<endl;                        SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  3.  Szczeg¢ˆowa analiza kaloryki     ";    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ TDEE ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  4.  Szczeg¢ˆowa analiza kaloryki     ";    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ TDEE ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  5.  Wy˜cwietlanie przedziaˆ¢w BMI   ";      SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ Klasyfikacja BMI og¢lna ]"<<endl;          SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  6.  Wy˜cwietlanie przedziaˆ¢w BMI   ";      SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ W zale¾no˜cci od wieku ]"<<endl;            SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  7.  Kasowanie pami¥ci                 ";    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ By obliczy˜c dla innych parametr¢w ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  9.  Podzi¥kowania! Objaśnienie wyników"<<endl;
+        cout<<"  3.  Podstawowa analiza kaloryki         "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"[ TDEE (PPM) ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  4.  Szczegółowa analiza kaloryki      "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"[ TDEE (PPM) ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  5.  Wy˜świetlanie przedziałów BMI   "<<char(16);      SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"[ Klasyfikacja BMI ogólna ]"<<endl;          SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  6.  Wy˜świetlanie przedziałów BMI   "<<char(16);      SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"[ W zależności od wieku ]"<<endl;            SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  7.  Kasowanie pamięci                  "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"[ By obliczyć dla innych parametrów ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  9.  Podziękowania! Objaśnienie wyników"<<endl;
         cout<<"  0.  Koniec programu "<<endl;
         cout<<"==================================================================================="<<endl;
         SetConsoleTextAttribute(uchwyt, 12);
-        cout<<"      Tw¢j wyb¢r (wpisz nr wybranej opcji): ";
+        cout<<"      Twój wybór (wpisz nr wybranej opcji): ";
         SetConsoleTextAttribute(uchwyt, 15);
         cin>>cos_z_klawiatury;
 
@@ -95,11 +96,11 @@ int main()
             case 4:
             {
                 if(waga == 0 || wzrost == 0 || wiek == 0){
-                    cout << "Wprowad« parametry zaokr¥glone do peˆnych liczb dziesi©tnych, odpowied« zatwierdz klawiszem Enter" << endl;
+                    cout << "Wprowadź parametry zaokrąglone do pełnych liczb dziesiętnych, odpowiedź zatwierdz klawiszem Enter" << endl;
                     cout << "Waga[kg]: ";       cin >> waga;
                     cout << "Wzrost[cm]: ";     cin >> wzrost;
                     cout << "Wiek[lat]: ";      cin >> wiek;
-                    cout << "Pˆec[K/M]: ";      cin >> plec;
+                    cout << "Płec[K/M]: ";      cin >> plec;
                     kropki();
                 }
             }    break;
@@ -146,12 +147,12 @@ int main()
             cout<<endl;
             SetConsoleTextAttribute(uchwyt, 14);
             cout<<"======================================================================================="<<endl;
-            cout<<"   Dzi©kuj© serdecznie za wsparcie i cierpliwo˜rcćo˜ci wszystkim wok¢ˆ mnie <3!"<<endl;
-            cout<<"   Prosz©, je˜cli to nie problem, o feedback"<<char(1)<<" Like, komenta«, subskrypcj©."<<endl;
+            cout<<"   Dziękuję serdecznie za wsparcie i cierpliwość wszystkim wokół mnie <3!"<<endl;
+            cout<<"   Proszę, o ile to nie będzie problem, o feedback"<<char(2)<<" Like'i, komentaże, subskrypcje."<<char(3)<<endl;
             cout<<"   W sprawie intrpretacji wyników odsyłam Cię do wpisu z dnia: 15 Października 2020r"<<endl;
-            cout<<"   Odchudzanie, diety. Jak skutecznie się odchudzać bez efektu jo-jo  na blogu:"<<endl;
+            cout<<"   Odchudzanie, diety. Jak skutecznie się odchudzać bez efektu jo-jo na blogu:"<<endl;
             cout<<"   https://lesserr4more.wordpress.com/"<<endl;
-            cout<<"   !Jeśli Twoje ciało to żywa masa mięśniowa - wskaźnik BMI nie jest dla Ciebie!"<<endl;
+            cout<<"   P.S. !Jeśli Twoje ciało to żywa masa mięśniowa - wskaźnik BMI nie jest dla Ciebie!"<<endl;
             cout<<"   Pozdrawiam serdecznie! - L4M"<<endl;
             cout<<"======================================================================================="<<endl<<endl;
             SetConsoleTextAttribute(uchwyt, 15);
@@ -198,36 +199,36 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
     string parametr[10], oBMI1[10], oBMI2[10], wBMI[10];
     cout << setprecision(5);
 
-    parametr[0]="Twoje BMI jest r¢wne:  ";
-    parametr[1]="Twoje BMR jest r¢wne [kcal]:  ";
-    parametr[2]="Twoje TEF jest r¢wne [kcal]:  ";
-    parametr[3]="Twoje EAT jest r¢wne [kcal]:  ";
-    parametr[4]="Twoje NEAT jest r¢wne [kcal]: ";
+    parametr[0]="Twoje BMI jest równe:  ";
+    parametr[1]="Twoje BMR jest równe [kcal]:  ";
+    parametr[2]="Twoje TEF jest równe [kcal]:  ";
+    parametr[3]="Twoje EAT jest równe [kcal]:  ";
+    parametr[4]="Twoje NEAT jest równe [kcal]: ";
     parametr[5]="Twoje TDEE to [kcal]:         ";
 
-    oBMI1[0]="         Klasyfikacja masy ciaˆa os¢b dorosˆych na podstawie BMI            ";
-    oBMI1[1]="Wygˆodzenie                        |  BMI < 16,0      |  Waga ciaˆa: niedowaga";
-    oBMI1[2]="Wychudzenie                         |  BMI 16,0-16,99  |  Waga ciaˆa: niedowaga";
-    oBMI1[3]="Niedowaga                           |  BMI 17,0-18,49  |  Waga ciaˆa: niedowaga";
-    oBMI1[4]="Porz¥dana masa ciaˆa              |  BMI 18,5-24,99  |  Waga ciaˆa: optimum  ";
-    oBMI1[5]="Nadwaga                             |  BMI 25,0-29,99  |  Waga ciaˆa: niedowaga";
-    oBMI1[6]="otyˆo˜ci I stopnia                |  BMI 30,0-34,99  |  Waga ciaˆa: otyˆo˜ci  ";
-    oBMI1[7]="otyˆo˜ci II stopnia (duza)        |  BMI 35,0-39,99  |  Waga ciaˆa: otyˆo˜ci  ";
-    oBMI1[8]="otyˆo˜ci II stopnia (chor¢bliwa) |  BMI ? 40,0      |  Waga ciaˆa: otyˆo˜ci  ";
+    oBMI1[0]="         Klasyfikacja masy ciała osób dorosłych na podstawie BMI            ";
+    oBMI1[1]="Wygłodzenie                        |  BMI < 16,0      |  Waga ciała: niedowaga";
+    oBMI1[2]="Wychudzenie                         |  BMI 16,0-16,99  |  Waga ciała: niedowaga";
+    oBMI1[3]="Niedowaga                           |  BMI 17,0-18,49  |  Waga ciała: niedowaga";
+    oBMI1[4]="Porządana masa ciała              |  BMI 18,5-24,99  |  Waga ciała: optimum  ";
+    oBMI1[5]="Nadwaga                             |  BMI 25,0-29,99  |  Waga ciała: niedowaga";
+    oBMI1[6]="Otyłość I stopnia                |  BMI 30,0-34,99  |  Waga ciała: otyłość  ";
+    oBMI1[7]="Otyłość II stopnia (duza)        |  BMI 35,0-39,99  |  Waga ciała: otyłość  ";
+    oBMI1[8]="Otyłość II stopnia (chorobliwa) |  BMI > 40,0      |  Waga ciała: otyłość  ";
 
 
-    oBMI2[0]="             Klasyfikacja masy ciaˆa os¢b dorosˆych na podstawie BMI    ";
-    oBMI2[1]="   |  Zwi©kszony poziom wyst¥pienia innych problem¢w zdrowotnych        ";
-    oBMI2[2]="   |  Zwi©kszony poziom wyst¥pienia innych problem¢w zdrowotnych        ";
-    oBMI2[3]="   |  Zwi©kszony poziom wyst¥pienia innych problem¢w zdrowotnych        ";
-    oBMI2[4]="   |  Ryzyko chor¢b towarzyszacych otyˆo˜ci:  | minimalne                ";
-    oBMI2[5]="   |  Ryzyko chor¢b towarzyszacych otyˆo˜ci:  | ˜rednie                   ";
-    oBMI2[6]="|  Ryzyko chor¢b towarzyszacych otyˆo˜ci:  | wysokie                     ";
-    oBMI2[7]="|  Ryzyko chor¢b towarzyszacych otyˆo˜ci:  | bardzo wysokie              ";
-    oBMI2[8]="|  Ryzyko chor¢b towarzyszacych otyˆo˜ci:  | ekstremalny poziom ryzyka   ";
+    oBMI2[0]="             Klasyfikacja masy ciała osób dorosłych na podstawie BMI    ";
+    oBMI2[1]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
+    oBMI2[2]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
+    oBMI2[3]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
+    oBMI2[4]="   |  Ryzyko chorób towarzyszacych Otyłość:  | minimalne                ";
+    oBMI2[5]="   |  Ryzyko chorób towarzyszacych Otyłość:  | śednie                   ";
+    oBMI2[6]="|  Ryzyko chorób towarzyszacych Otyłość:  | wysokie                     ";
+    oBMI2[7]="|  Ryzyko chorób towarzyszacych Otyłość:  | bardzo wysokie              ";
+    oBMI2[8]="|  Ryzyko chorób towarzyszacych Otyłość:  | ekstremalny poziom ryzyka   ";
 
-    wBMI[0]="              Po¾¥dany BMI zale¾y od wieku i wynosi odpowiednio:                   ";
-    wBMI[1]="BMI nie zostalo obliczone, poniewa¾ jest wska«nikiem dla os¢b powy¾ej 18 roku ¾ycia";
+    wBMI[0]="              Pożądany BMI zależy od wieku i wynosi odpowiednio:                   ";
+    wBMI[1]="BMI nie zostalo obliczone, ponieważ jest wskaźnikiem dla osób powyżej 18 roku życia";
     wBMI[2]="                  Wiek: 19 - 24 lata     -     BMI: 19 - 24                        ";
     wBMI[3]="                  Wiek: 25 - 34 lata     -     BMI: 20 - 25                        ";
     wBMI[4]="                  Wiek: 35 - 44 lata     -     BMI: 21 - 26                        ";
@@ -278,10 +279,10 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
             else if(f_BMI >= 40.0){                     parametr[6] = oBMI1[8]; parametr[7] = oBMI2[8]; grupa1 = 9;}
  /*
                  if((BMI_min-xxxxxxxxxxxxxxxxf_BMI)<=1 && (BMI_min-f_BMI)>0.1){
-                        parametr[8] = "Zbli¾asz si© do dolnej granicy odpowiedniego dla Ciebie BMI. Zachowaj ostrożność.";
+                        parametr[8] = "Zbliżasz się do dolnej granicy odpowiedniego dla Ciebie BMI. Zachowaj ostrożność.";
                  }
                  if((BMI_maxxxxxxxxxxxxxxxxxx-f_BMI)<=1 && (BMI_max-f_BMI)<0.1){
-                        parametr[8] = "Zbli¾asz si© do g¢rnej granicy odpowiedniego dla Ciebie BMI. Zachowaj ostrożność.";
+                        parametr[8] = "Zbliżasz się do górnej granicy odpowiedniego dla Ciebie BMI. Zachowaj ostrożność.";
                         }
 */
 
@@ -298,7 +299,7 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
 
     cout << setprecision(5);
         if(f_BMR>0) cout << parametr[1] << trunc(f_BMR)                            <<   endl;
-        else cout << "Błąd danych, spróbuj usunąć panięć i spróbuj ponownie"       <<   endl;
+        else cout << "Błąd danych, spróbuj usunąć pamięć i spróbuj ponownie"       <<   endl;
     }break;
     case 3:{
         if(f_BMR>0)cout << parametr[1] << trunc(f_BMR)                             <<   endl;
@@ -374,10 +375,10 @@ float obliczBMR(string f_plec, float f_waga, float f_wzrost, float f_wiek){
 
 
 //.....................................................................................................
-// Obliczanie TEF, TEA, NEET ze wzoru
+// Obliczanie szczegółowe TDEE - TEF, TEA, NEET ze wzoru
 float obliczTDEEfull(float f_BMR, float f_wiek){
 
-float     BMI, NEAT=0, EAT=0, TEF, TEA=0, EPOC=0, TDEE=0;
+float     NEAT=0, EAT=0, TEF, TEA=0, EPOC=0, TDEE=0;
 float     kcal_sila, kcal_wyt_lekka, kcal_wyt_srednia, kcal_wyt_wysoka, TEA_sila, TEA_wyt, EPOC_sila_min, EPOC_sila_max, EPOC_wyt;
 float     typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_wysoka, punkty;
 float     trening_sily, trening_wyt_lekka, trening_wyt_srednia, trening_wyt_wysoka;
@@ -385,63 +386,69 @@ string    trenuje, obliczam_sam;
 
     kropki();
     TEF = 0.07;
-    cout << "Pierwszy krok, poza BMR, to zaˆo¾enie TEF. Na potrzeby naszych obliczeä przyjmiemy "<< trunc(TEF*100) << "%" << endl;
+    cout << "Pierwszy krok, poza BMR, to założenie TEF. Na potrzeby naszych obliczeń przyjmiemy "<< trunc(TEF*100) << "%" << endl;
     Sleep(1500);
-    wyswietl(3, f_wiek, NEAT, BMI, f_BMR, TEF, EAT, TDEE);
+    wyswietl(3, f_wiek, NEAT, 0, f_BMR, TEF, EAT, TDEE);
 
     cout << "Teraz obliczymy NEAT i EAT [TEA + EPOC]"                                           << endl;
-    cout << "Wybiesz jedn¥ z opcji, zatwierd« przyciskiem Enter"                                << endl;
-    cout << "S¥dze, ze jestem..."                                                               << endl;
-    cout << "1. Ektomorfikiem -  Osob¥: drobna, szczupˆa, dˆugie koäczyny, szybki metabolizm"   << endl;
-    cout << "2. Mezomorfikiem -  Osob¥: postawna, umi©˜niona, smukˆa, szerokie barki"            << endl;
-    cout << "3. Endomorfikiem -  Osob¥: przysadzista, z tendencj¥ do tycia, wolny metabolizm"   << endl;
-    cout << "Wpisz liczb© od 1 do 3: ";                                                     cin >> typ_osoby;
+    cout << "Wybiesz jedną z opcji, zatwierdź przyciskiem Enter"                                << endl;
+    cout << "Sądze, ze jestem..."                                                               << endl;
+    cout << "1. Ektomorfikiem -  Osobą: drobna, szczupła, długie kończyny, szybki metabolizm"   << endl;
+    cout << "2. Mezomorfikiem -  Osobą: postawna, umięśniona, smukła, szerokie barki"            << endl;
+    cout << "3. Endomorfikiem -  Osobą: przysadzista, z tendencją do tycia, wolny metabolizm"   << endl;
+    cout << "Wpisz liczbę od 1 do 3: ";                                                     cin >> typ_osoby;
 
     cout << endl;
-    cout << "Czy uprawiasz regularnie aktywno˜† fizyczn¥?"                                      << endl;
-    cout << "Odpowied« [T/N]: ";                                                            cin >> trenuje;
+    cout << "Czy uprawiasz regularnie aktywność fizyczną?"                                      << endl;
+    cout << "Odpowiedź [T/N]: ";                                                            cin >> trenuje;
     transform(trenuje.begin(), trenuje.end(), trenuje.begin(),::tolower);
 
     if(trenuje == "t" || trenuje == "tak"){
         cout << endl;
-        cout << "Czy wiesz ile ˜rednio kalorii spalasz dziennie w trakcie aktywno˜ci?"              << endl;
-        cout << "Odpowiedz tak[T], je˜li chcesz samodzielnie wprowadzi† ˜redni¥ warto˜†"             << endl;
-        cout << "spalanych kalorii ( je˜li u¾ywasz do tego dokˆadnych przy¾¥d¢w pomiarowych )"    << endl;
-        cout << "Nie[N], je˜li chcesz, aby obliczyˆ to program [T/N]: ";                        cin >> obliczam_sam;
+        cout << "Czy wiesz ile śednio kalorii spalasz dziennie w trakcie aktywnośi?"              << endl;
+        cout << "Odpowiedz TAK[T], jeśi chcesz samodzielnie wprowadzić śednią wartość spalanych kalorii"             << endl;
+        cout << "( jeśi używasz do tego dokładnych przyżądów pomiarowych )"    << endl;
+        cout << "Odpowiedz NIE[N], je˜li chcesz, aby obliczył to za Ciebie program [T/N]: ";                        cin >> obliczam_sam;
     }
 
     transform(obliczam_sam.begin(), obliczam_sam.end(), obliczam_sam.begin(),::tolower);
     if(obliczam_sam == "t" || obliczam_sam == "tak"){
-        cout << "Podczas tygodnia treningowego spalam dziennie ˜rednio [kcal'i]..."             << endl;
-        cout << "Wpisz ile ˜rednio dziennie spalasz [kcal]: ";                              cin >> TEA;
-        cout << "Wpisz ilo˜† trening¢w siˆowych: ";                                             cin >> trening_sily;
-        cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci lekkiej: ";             cin >> trening_wyt_lekka;
-        cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci ˜redniej: ";            cin >> trening_wyt_srednia;
-        cout << "Wpisz ilo˜† trening¢w  wytrzymaˆo˜ciowych intensywno˜ci wysokiej: ";            cin >> trening_wyt_wysoka;
+        cout << "Podczas tygodnia treningowego spalam dziennie śednio [kcal'i]..."             << endl;
+        cout << "Wpisz ile śednio dziennie spalasz [kcal]: ";                              cin >> TEA;
+        cout << "Wpisz ilość treningów siłowych: ";                                             cin >> trening_sily;
+        cout << "Wpisz ilość treningów wytrzymałościowych intensywności lekkiej: ";             cin >> trening_wyt_lekka;
+        cout << "Wpisz ilość treningów wytrzymałościowych intensywności śedniej: ";            cin >> trening_wyt_srednia;
+        cout << "Wpisz ilość treningów wytrzymałościowych intensywności wysokiej: ";            cin >> trening_wyt_wysoka;
     }else if(obliczam_sam == "n" || obliczam_sam == "nie"){
         cout << endl;
-        cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä siˆowych..."                  << endl;
-        cout << "Wpisz liczb© minut [0-840]: ";                                             cin >> minut_sily;
-        cout << "To stanowi [ile] trening¢w siˆowych w tygodniu..."                             << endl;
-        cout << "Wpisz ilo˜† trening¢w siˆowych: ";                                             cin >> trening_sily;
+        cout << "Mój trening siłowy trwa średnio ... [minut]"                  << endl;
+        cout << "Wpisz liczbę minut [0-300]: ";                                             cin >> minut_sily;
+        cout << "Treningów tego typu mam w tygodniu..."                             << endl;
+        cout << "Wpisz ilość treningów siłowych: ";                                             cin >> trening_sily;
+        minut_sily *= trening_sily/7;
 
         cout << endl;
-        cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä wytrzymaˆo˜ciowych o intensywno˜ci lekkiej..." << endl;
-        cout << "Wpisz liczb© minut w 50-65% HR MAX [0-5880]: ";                                cin >> minut_wyt_lekka;
-        cout << "Trening¢w o stricte takim chatakterze mam w tygodniu..."                           << endl;
-        cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci lekkiej: ";             cin >> trening_wyt_lekka;
+        cout << "Teraz będą 3 pytania, dotyczące treningu wytrzymałościowego podzielone są według intensywności" << endl;
+        cout << "Intensywność niska: 50-65% HR MAX \nIntensywność średnia: 66-80% HR MAX \nIntensywność wysokarednia: 81-100% HR MAX" << endl;
+        Sleep(1500);
+        cout << endl;
+        cout << "Mój trening  wytrzymałościowych o intensywności niskiej trwa średnio ... [minut]" << endl;
+        cout << "Wpisz liczbę minut w zakresach 50-65% HR MAX [0-700]: ";                                cin >> minut_wyt_lekka;
+        minut_wyt_lekka *= trening_wyt_lekka/7;
+        cout << "Treningów o stricte takim chatakterze mam w tygodniu..."                           << endl;
+        cout << "Wpisz ilość treningów wytrzymałościowych intensywności lekkiej: ";             cin >> trening_wyt_lekka;
 
         cout << endl;
-        cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä wytrzymaˆo˜ciowych o intensywno˜ci ˜redniej..." << endl;
-        cout << "Wpisz liczb© minut w 66-80% HR MAX [0-3360]: ";                                cin >> minut_wyt_srednia;
-        cout << "Trening¢w o stricte takim chatakterze mam w tygodniu..."                           << endl;
-        cout << "Wpisz ilo˜† trening¢w wytrzymaˆo˜ciowych intensywno˜ci ˜redniej: ";            cin >> trening_wyt_srednia;
+        cout << "Mój trening  wytrzymałościowych o intensywności średniej trwa średnio ... [minut]" << endl;
+        cout << "Wpisz liczbę minut w zakresach 66-80% HR MAX [0-300]: ";                                cin >> minut_wyt_srednia;
+        cout << "Treningów o stricte takim chatakterze mam w tygodniu..."                           << endl;
+        cout << "Wpisz ilość treningów wytrzymałościowych intensywności śedniej: ";            cin >> trening_wyt_srednia;
 
         cout << endl;
-        cout << "Sp©dzam ˜rednio [minut] dziennie podczas †wiczeä wytrzymaˆo˜ciowych o intensywno˜ci wysokiej..." << endl;
-        cout << "Wpisz liczb© minut w 81-100% HR MAX [0-560]: ";                                cin >> minut_wyt_wysoka;
-        cout << "Trening¢w o stricte takim chatakterze mam w tygodniu..."                           << endl;
-        cout << "Wpisz ilo˜† trening¢w  wytrzymaˆo˜ciowych intensywno˜ci wysokiej: ";            cin >> trening_wyt_wysoka;
+        cout << "Mój trening  wytrzymałościowych o intensywności wysokiej trwa średnio ... [minut]" << endl;
+        cout << "Wpisz liczbę minut w zakresach 81-100% HR MAX [0-50]: ";                                cin >> minut_wyt_wysoka;
+        cout << "Treningów o stricte takim chatakterze mam w tygodniu..."                           << endl;
+        cout << "Wpisz ilość treningów  wytrzymałościowych intensywności wysokiej: ";            cin >> trening_wyt_wysoka;
 
     //.....................................................................................................
         if(trening_sily     >1  || minut_sily       >20)    punkty++;
@@ -451,21 +458,21 @@ string    trenuje, obliczam_sam;
 
     }
 
-    if(typ_osoby == 3){
-        if(punkty < 1)      NEAT = 200;
-        else if(punkty >= 1)NEAT = 300;
-        else                NEAT = 400;
+    if(typ_osoby==3){
+        if(punkty<1)      NEAT = 200;
+        else if(punkty>=1)NEAT = 300;
+        else              NEAT = 400;
     }
 
-    if(typ_osoby == 2){
-        if(punkty < 2)      NEAT = 400;
-        else                NEAT = 500;
+    if(typ_osoby==2){
+        if(punkty<2)      NEAT = 400;
+        else              NEAT = 500;
     }
 
-    if(typ_osoby == 1){
-        if(punkty < 1)      NEAT = 700;
-        else if(punkty >= 1)NEAT = 800;
-        else                NEAT = 900;
+    if(typ_osoby==1){
+        if(punkty<1)      NEAT = 700;
+        else if(punkty>=1)NEAT = 800;
+        else              NEAT = 900;
     }
 
     kropki();
@@ -487,9 +494,9 @@ string    trenuje, obliczam_sam;
                 TEA = TEA_sila+TEA_wyt;
 
                 cout << setprecision(5);
-                cout << "TEA trening siˆa:               " << trunc(TEA_sila) << endl;
+                cout << "TEA trening siła:               " << trunc(TEA_sila) << endl;
                 Sleep(1500);
-                cout << "TEA trening wytrzymaˆo˜c:     " << trunc(TEA_wyt) << endl;
+                cout << "TEA trening wytrzymałość:     " << trunc(TEA_wyt) << endl;
                 Sleep(1500);
                 cout << "W sumie TEA:                   " << trunc(TEA) << endl;
                 Sleep(1500);
@@ -500,11 +507,9 @@ string    trenuje, obliczam_sam;
 
         EPOC    = EPOC_wyt;
 
-        EPOC_sila_min = trunc(TDEE*0.04);
-        EPOC_sila_max = trunc(TDEE*0.07);
 
         EPOC =  EPOC_sila_min + EPOC_wyt;
-        cout << "EPOC trening wytrzymaˆo˜c:     " << trunc(EPOC_wyt) << endl;
+        cout << "EPOC trening wytrzymałość:     " << trunc(EPOC_wyt) << endl;
         Sleep(1500);
         cout << "W sumie EPOC:                   " << trunc(EPOC) << endl;
         Sleep(1500);
@@ -513,9 +518,99 @@ string    trenuje, obliczam_sam;
     EAT     = TEA + EPOC;
     TDEE    = f_BMR + TEF + EAT + NEAT;
 
+    EPOC_sila_min = trunc(TDEE*0.04);
+    EPOC_sila_max = trunc(TDEE*0.07);
+
     if(obliczam_sam=="n" || obliczam_sam=="nie"){
-        cout << "Min. EPOC trening siˆa:        " << EPOC_sila_min << endl;
-        cout << "Max. EPOC trening siˆa:        " << EPOC_sila_max << endl;
+        cout << "Min. EPOC trening siła:        " << EPOC_sila_min << endl;
+        cout << "Max. EPOC trening siła:        " << EPOC_sila_max << endl;
+        Sleep(1500);
+    }
+
+    cout << "EAT  = TEA + EPOC             =  " << EPOC << endl;
+    Sleep(1500);
+    cout << "TDEE = BMR + TEF + EAT + NEAT =  " << TDEE << endl;
+
+    system("pause");
+
+    return(TDEE);
+}
+
+//.....................................................................................................
+// Obliczanie proste TDEE na podstawie współczynnika aktywności ze wzoru
+float obliczTDEElight(float f_BMR){
+
+float TDEE=0, EAT_x=0;
+int stopienAktywnosci;
+
+    kropki();
+    wyswietl(3, 0, 0, 0, f_BMR, 0, 0, TDEE);
+
+    cout << "Wybiesz jedną z opcji, zatwierdź przyciskiem Enter"                                << endl;
+    cout << "Moją aktywność fizyczną najlepiej reprezentuje opis numer..."                      << endl;
+    cout << "1. Brak aktywności, praca siedząca"                                                << endl;
+    cout << "2. Niska aktywność (praca siedząca i 1-2 treningi w tygodniu)"                     << endl;
+    cout << "3. Srednia aktywność (praca siedząca i treningi 3-4 razy w tygodniu)"              << endl;
+    cout << "4. Wysoka aktywność (praca fizyczna i 3-4 treningi w tygodniu)"                    << endl;
+    cout << "5. Bardzo wysoka aktywność (zawodowi sportowcy, osoby codziennie trenujące)"       << endl;
+    cout << "Wpisz liczbę od 1 do 5: ";                                                     cin >> stopienAktywnosci;
+
+    switch(stopienAktywnosci){
+    case 1:{
+        EAT_x=f_BMR*0.2;
+        TDEE=f_BMR*1.2;
+    }
+    case 2:{
+        EAT_x=f_BMR*0.2;
+        TDEE=f_BMR*1.2;
+    }
+    case 3:{
+        EAT_x=f_BMR*0.2;
+        TDEE=f_BMR*1.2;
+    }
+    case 4:{
+        EAT_x=f_BMR*0.2;
+        TDEE=f_BMR*1.2;
+    }
+    case 5:{
+        EAT_x=f_BMR*0.2;
+        TDEE=f_BMR*1.2;
+    }
+    }
+
+                TEA = TEA_sila+TEA_wyt;
+
+                cout << setprecision(5);
+                cout << "TEA trening siła:               " << trunc(TEA_sila) << endl;
+                Sleep(1500);
+                cout << "TEA trening wytrzymałość:     " << trunc(TEA_wyt) << endl;
+                Sleep(1500);
+                cout << "W sumie TEA:                   " << trunc(TEA) << endl;
+                Sleep(1500);
+            }
+        //.....................................................................................................
+
+        EPOC_wyt = trunc(trening_wyt_lekka*5+trening_wyt_srednia*35+trening_wyt_wysoka*180);
+
+        EPOC    = EPOC_wyt;
+
+
+        EPOC =  EPOC_sila_min + EPOC_wyt;
+        cout << "EPOC trening wytrzymałość:     " << trunc(EPOC_wyt) << endl;
+        Sleep(1500);
+        cout << "W sumie EPOC:                   " << trunc(EPOC) << endl;
+        Sleep(1500);
+    }
+
+    EAT     = TEA + EPOC;
+    TDEE    = f_BMR + TEF + EAT + NEAT;
+
+    EPOC_sila_min = trunc(TDEE*0.04);
+    EPOC_sila_max = trunc(TDEE*0.07);
+
+    if(obliczam_sam=="n" || obliczam_sam=="nie"){
+        cout << "Min. EPOC trening siła:        " << EPOC_sila_min << endl;
+        cout << "Max. EPOC trening siła:        " << EPOC_sila_max << endl;
         Sleep(1500);
     }
 
@@ -547,13 +642,13 @@ void rozmiarOkna(int x_s, int y_s){
 
 
 /*
-        oBMI2[0]="Klasyfikacja masy ciaˆa os¢b dorosˆych na podstawie BMI";
-        oBMI2[1]="Wyglodzenie  |  BMI < 16,0  |  Waga ciaˆa: niedowaga	Zwi©kszony poziom wyst¥pienia innych problem¢w zdrowotnych";
-        oBMI2[2]="Wychudzenie  |  BMI 16,0-16,99  |  Waga ciaˆa: niedowaga	Zwi©kszony poziom wyst¥pienia innych problem¢w zdrowotnych";
-        oBMI2[3]="Niedowaga  |  BMI 17,0-18,49  |  Waga ciaˆa: niedowaga Zwi©kszony poziom wyst¥pienia innych problem¢w zdrowotnych";
-        oBMI2[4]="Porz¥dana masa ciaˆa  |  BMI 18,5-24,99  |  Waga ciaˆa: optimum Ryzyko chor¢b towarzyszacych otyˆo˜ci: minimalne";
-        oBMI2[5]="Nadwaga  |  BMI 25,0-29,99  |  Waga ciaˆa: niedowaga	Ryzyko chor¢b towarzyszacych otyˆo˜ci: ˜rednie";
-        oBMI2[6]="otyˆo˜ci I stopnia  |  BMI 30,0-34,99  |  Waga ciaˆa: otyˆo˜ci Ryzyko chor¢b towarzyszacych otyˆo˜ci: wysokie";
-        oBMI2[7]="otyˆo˜ci II stopnia (duza)  |  BMI 35,0-39,99  |  Waga ciaˆa: otyˆo˜ci Ryzyko chor¢b towarzyszacych otyˆo˜ci: bardzo wysokie";
-        oBMI2[8]="otyˆo˜ci II stopnia (chor¢bliwa)  |  BMI ? 40,0  |  Waga ciaˆa: otyˆo˜ci Ryzyko chor¢b towarzyszacych otyˆo˜†: ekstremalny poziom ryzyka";
+        oBMI2[0]="Klasyfikacja masy ciała osób dorosłych na podstawie BMI";
+        oBMI2[1]="Wyglodzenie  |  BMI < 16,0  |  Waga ciała: niedowaga	Zwiększony poziom wystąpienia innych problemów zdrowotnych";
+        oBMI2[2]="Wychudzenie  |  BMI 16,0-16,99  |  Waga ciała: niedowaga	Zwiększony poziom wystąpienia innych problemów zdrowotnych";
+        oBMI2[3]="Niedowaga  |  BMI 17,0-18,49  |  Waga ciała: niedowaga Zwiększony poziom wystąpienia innych problemów zdrowotnych";
+        oBMI2[4]="Porządana masa ciała  |  BMI 18,5-24,99  |  Waga ciała: optimum Ryzyko chorób towarzyszacych Otyłość: minimalne";
+        oBMI2[5]="Nadwaga  |  BMI 25,0-29,99  |  Waga ciała: niedowaga	Ryzyko chorób towarzyszacych Otyłość: śednie";
+        oBMI2[6]="Otyłość I stopnia  |  BMI 30,0-34,99  |  Waga ciała: Otyłość Ryzyko chorób towarzyszacych Otyłość: wysokie";
+        oBMI2[7]="Otyłość II stopnia (duza)  |  BMI 35,0-39,99  |  Waga ciała: Otyłość Ryzyko chorób towarzyszacych Otyłość: bardzo wysokie";
+        oBMI2[8]="Otyłość II stopnia (choróbliwa)  |  BMI ? 40,0  |  Waga ciała: Otyłość Ryzyko chorób towarzyszacych otyˆość: ekstremalny poziom ryzyka";
 */
