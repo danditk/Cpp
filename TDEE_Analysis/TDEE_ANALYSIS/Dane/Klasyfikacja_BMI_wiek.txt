@@ -1,0 +1,8 @@
+              Pożądany BMI zależy od wieku i wynosi odpowiednio:                   
+BMI nie zostalo obliczone, ponieważ jest wskaźnikiem dla osób powyżej 18 roku życia
+                  Wiek: 19 - 24 lata     -     BMI: 19 - 24
+                  Wiek: 25 - 34 lata     -     BMI: 20 - 25
+                  Wiek: 35 - 44 lata     -     BMI: 21 - 26
+                  Wiek: 45 - 54 lata     -     BMI: 22 - 27
+                  Wiek: 55 - 64 lata     -     BMI: 23 - 28
+                  Wiek: ponad 64 lata    -     BMI: 24 - 29

@@ -6,6 +6,8 @@
 #include <string>
 #include <algorithm>
 #include <iomanip>
+#include <fstream>
+#include <conio.h>
 
 using namespace std;
 
@@ -26,15 +28,16 @@ void rozmiarOkna(int, int);
 
 
 // Deklaracja zmiennych
-int wybor_w_menu=-1;
-string cos_z_klawiatury;
-bool zlaopcja;
+string choice;
+char mainChoice;
+int tempChoice;
+bool pass, passD;
 float     waga, wzrost, wiek, wsp_BMR, etap=0;
 float     BMR=0, BMI=0, EAT=0, TEF, NEAT=0, TEA=0, EPOC=0, TDEE=0;
 float     kcal_sila, kcal_wyt_lekka, kcal_wyt_srednia, kcal_wyt_wysoka, TEA_sila, TEA_wyt, EPOC_sila_min, EPOC_sila_max, EPOC_wyt;
 float     typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_wysoka, punkty;
 float     trening_sily, trening_wyt_lekka, trening_wyt_srednia, trening_wyt_wysoka;
-string    plec, trenuje, obliczam_sam, ekran[30];
+string    plec, trenuje, obliczam_sam, thx[10];
 
 //Uchwyt do zmiany czciąki w konsoli
 HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -44,7 +47,7 @@ HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
 int main()
 {
 
-    while(wybor_w_menu!=0)
+    while(mainChoice!='0')
     {
         SetConsoleTextAttribute(uchwyt, 15);//ZMIEN KOLOR NA NR 15=WHITE
         //MAIN MENU
@@ -70,60 +73,74 @@ int main()
         cout<<"[ Klasyfikacja BMI ogólna ]"<<endl;          SetConsoleTextAttribute(uchwyt, 15);
         cout<<"  6.  Wy˜świetlanie przedziałów BMI   "<<char(16);      SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ W zależności od wieku ]"<<endl;            SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  7.  Kasowanie pamięci                  "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ By obliczyć dla innych parametrów ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  8.  Dobór kaloryki w diecie            "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"  7.  Dobór kaloryki w diecie            "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
         cout<<"[ Masa, utrzymanie lub redukcja ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  8.  Kasowanie pamięci                  "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
+        cout<<"[ By obliczyć dla innych parametrów ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
         cout<<"  9.  Podziękowania! Objaśnienie wyników"<<endl;
         cout<<"  0.  Koniec programu "<<endl;
         cout<<"==================================================================================="<<endl;
         SetConsoleTextAttribute(uchwyt, 12);
         cout<<"      Twój wybór (wpisz nr wybranej opcji): ";
         SetConsoleTextAttribute(uchwyt, 15);
-        cin>>cos_z_klawiatury;
+        mainChoice = getch();
 
-        //Walidacja CZY TO LICZBA?
-        zlaopcja=false;
-        for(int i=0; i<cos_z_klawiatury.length(); i++)
-        {
-            if ((cos_z_klawiatury[i]<48)||(cos_z_klawiatury[i]>57)) zlaopcja=true;
-            //SPRAWDZ KODY W TABLICY ASCII - CZY TO NA PEWNO SAME CYFRY (48-57)?
-        }
-        if (zlaopcja==false) wybor_w_menu=atoi(cos_z_klawiatury.c_str());
+        //Walidacja CZY TO LICZBA 0-9?
+        tempChoice = mainChoice - 0;
+        pass=false;
+        if ((tempChoice<48)||(tempChoice>57)) pass=true;
+        //SPRAWDZ KODY W TABLICY ASCII - CZY TO NA PEWNO SAME CYFRY (48-57)?
 
-        //USTAL KTORY PLIK ZAWIERA PYTANIA I OTWORZ GO DO ODCZYTU
-        switch(wybor_w_menu)
+        switch(mainChoice)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
+            case '1':
+            case '2':
+            case '3':
+            case '4':
             {
                 if(waga == 0 || wzrost == 0 || wiek == 0){
+                    passD = true;
+                    cout << endl;
                     cout << "Wprowadź parametry zaokrąglone do pełnych liczb dziesiętnych, odpowiedź zatwierdz klawiszem Enter" << endl;
                     cout << "Waga[kg]: ";       cin >> waga;
+                    tempChoice = waga;
+                    if(tempChoice <= 2 || tempChoice > 300) passD = false;
                     cout << "Wzrost[cm]: ";     cin >> wzrost;
+                    tempChoice = wzrost;
+                    if(tempChoice <= 2 || tempChoice > 300) passD = false;
                     cout << "Wiek[lat]: ";      cin >> wiek;
+                    tempChoice = wiek;
+                    if(tempChoice <= 1 || tempChoice > 120) passD = false;
                     cout << "Płec[K/M]: ";      cin >> plec;
-                    kropki();
+                    transform(plec.begin(), plec.end(), plec.begin(),::tolower);
+                    if(plec != "k" && plec != "m") passD = false;
+                    if(passD==false){
+                       blad();
+                       waga=0;
+                       wzrost=0;
+                       wiek=0;
+                       plec="";
+                       main();
+                    }
+
                 }
-            }    break;
+            }break;
 
         }
-        switch(wybor_w_menu){
-            case 1: {
+        switch(mainChoice){
+            case '1': {
                 kropki();
                 BMI = obliczBMI(waga,wzrost);
                 wyswietl(1, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
-            case 2: {
+            case '2': {
                 kropki();
                 BMR = obliczBMR(plec,waga,wzrost,wiek);
                 wyswietl(2, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
-            case 3: {
+            case '3': {
                 kropki();
                 if(BMR==0) BMR = obliczBMR(plec,waga,wzrost,wiek);
                 wyswietl(2, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
@@ -131,53 +148,65 @@ int main()
                 TDEE = obliczTDEEsimple(BMR);
                 system("pause");
             }break;
-            case 4: {
+            case '4': {
                 kropki();
                 if(BMR==0) BMR = obliczBMR(plec,waga,wzrost,wiek);
                 TDEE = obliczTDEEfull(BMR, wiek);
-                wyswietl(2, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 wyswietl(5, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
-            case 5: {wyswietl(10, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
-            case 6: {wyswietl(11, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
-            case 7:
+            case '5': {wyswietl(10, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
+            case '6': {wyswietl(11, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
+            case '7': {
+                kropki();
+                obliczDoborKcal(TDEE);
+                system("pause");
+            }break;
+            case '8':
             {
                 waga=0;
                 wzrost=0;
                 wiek=0;
                 plec="";
-            }break;
-            case 8: {
-                kropki();
-                obliczDoborKcal(TDEE);
+                cout<< "Dane zostały usunięte :)!";
                 system("pause");
             }break;
-            case 0: {
+            case '0': {
                     cout<<endl<<"Koniec programu! Dzieki serdeczne!"<<endl;
                     kropki();
                     exit(0);
                     }break;
-            default: zlaopcja=true; break;
+            default: pass=true; break;
         }
 
-        if(wybor_w_menu==9) //PODZIEKOWANIA
+        if(mainChoice=='9') //PODZIEKOWANIA
         {
             cout<<endl;
             SetConsoleTextAttribute(uchwyt, 14);
-            cout<<"======================================================================================="<<endl;
-            cout<<"   Dziękuję serdecznie za wsparcie i cierpliwość wszystkim wokół mnie <3!"<<endl;
-            cout<<"   Proszę, o ile to nie będzie problem, o feedback"<<char(2)<<" Like'i, komentaże, subskrypcje."<<char(3)<<endl;
-            cout<<"   W sprawie intrpretacji wyników odsyłam Cię do wpisu z dnia: 15 Października 2020r"<<endl;
-            cout<<"   Odchudzanie, diety. Jak skutecznie się odchudzać bez efektu jo-jo na blogu:"<<endl;
-            cout<<"   https://lesserr4more.wordpress.com/"<<endl;
-            cout<<"   P.S. !Jeśli Twoje ciało to żywa masa mięśniowa - wskaźnik BMI nie jest dla Ciebie!"<<endl;
-            cout<<"   Pozdrawiam serdecznie! - L4M"<<endl;
-            cout<<"======================================================================================="<<endl<<endl;
+
+        // Pobieranie danych Podziękowanie z pliku
+            int noLine=1;
+            string line;
+
+            fstream file_thx;
+            file_thx.open("Dane/Podziekowania.txt", ios::in);
+            if(file_thx.good()==false){
+                cout << "Plik nie został znaleziony, nie można wyświetlić danych :(" << endl;
+            }
+            while(getline(file_thx,line)){
+
+                //thx[noLine-1]=
+                cout << line << endl;
+
+                noLine++;
+            }
+
+            file_thx.close();
+
             SetConsoleTextAttribute(uchwyt, 15);
             system("pause");
         }
-        else if (zlaopcja==true) blad();//NIEPOPRAWNA OPCJA W MENU
+        else if (pass==true) blad();//NIEPOPRAWNA OPCJA W MENU
     }
 
     return 0;
@@ -190,7 +219,7 @@ void blad(){
             cout<<endl;
             SetConsoleTextAttribute(uchwyt, 12);
             cout<<"==============================================================================="<<endl;
-            cout<<"                    Nie ma takiej opcji, spróbuj ponownie!"<<endl;
+            cout<<"                     Coś poszło nie tak, spróbuj ponownie!"<<endl;
             cout<<"==============================================================================="<<endl<<endl;
             SetConsoleTextAttribute(uchwyt, 15);
             system("pause");
@@ -225,38 +254,57 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
     parametr[4]="Twoje NEAT jest równe [kcal]:    ";
     parametr[5]="Twoje TDEE to [kcal]:            ";
 
-    oBMI1[0]="         Klasyfikacja masy ciała osób dorosłych na podstawie BMI            ";
-    oBMI1[1]="Wygłodzenie                        |  BMI < 16,0      |  Waga ciała: niedowaga";
-    oBMI1[2]="Wychudzenie                         |  BMI 16,0-16,99  |  Waga ciała: niedowaga";
-    oBMI1[3]="Niedowaga                           |  BMI 17,0-18,49  |  Waga ciała: niedowaga";
-    oBMI1[4]="Porządana masa ciała              |  BMI 18,5-24,99  |  Waga ciała: optimum  ";
-    oBMI1[5]="Nadwaga                             |  BMI 25,0-29,99  |  Waga ciała: niedowaga";
-    oBMI1[6]="Otyłość I stopnia                |  BMI 30,0-34,99  |  Waga ciała: otyłość  ";
-    oBMI1[7]="Otyłość II stopnia (duza)        |  BMI 35,0-39,99  |  Waga ciała: otyłość  ";
-    oBMI1[8]="Otyłość II stopnia (chorobliwa)  |  BMI > 40,0      |  Waga ciała: otyłość  ";
+    // Pobieranie danych o BMI_ogólne z pliku
+    int noLine=1, tabInsex=0;
+    string line, findMark = ";";
+
+    fstream file_oBMI;
+    file_oBMI.open("Dane/Klasyfikacja_BMI_ogolna.txt", ios::in);
+    if(file_oBMI.good()==false){
+        cout << "Plik nie został znaleziony, nie można wyświetlić danych :(" << endl;
+    }
+    while(getline(file_oBMI,line)){
+
+        if(noLine<10){
+            oBMI1[tabInsex]=line;
+            size_t position = oBMI1[tabInsex].find(findMark);
+            if (position != string::npos){
+                oBMI1[tabInsex].erase(position,1);
+            }
+        }
+        if(noLine>11){
+            oBMI2[tabInsex]=line;
+            size_t position = oBMI2[tabInsex].find(findMark);
+            if (position != string::npos){
+                oBMI2[tabInsex].erase(position,1);
+            }
+        }
+        if(noLine == 9){
+            noLine=11;
+            tabInsex=-2;
+        }
+        noLine++;
+        tabInsex++;
+    }
+    file_oBMI.close();
+
+    //Koniec pobierania danych
 
 
-    oBMI2[0]="             Klasyfikacja masy ciała osób dorosłych na podstawie BMI    ";
-    oBMI2[1]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
-    oBMI2[2]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
-    oBMI2[3]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
-    oBMI2[4]="   |  Ryzyko chorób towarzyszacych Otyłość:  | minimalne                ";
-    oBMI2[5]="   |  Ryzyko chorób towarzyszacych Otyłość:  | śednie                   ";
-    oBMI2[6]="|  Ryzyko chorób towarzyszacych Otyłość:  | wysokie                     ";
-    oBMI2[7]="|  Ryzyko chorób towarzyszacych Otyłość:  | bardzo wysokie              ";
-    oBMI2[8]="|  Ryzyko chorób towarzyszacych Otyłość:  | ekstremalny poziom ryzyka   ";
+    // Pobieranie danych o BMI_wiek z pliku
+    noLine=1;
 
-    wBMI[0]="              Pożądany BMI zależy od wieku i wynosi odpowiednio:                   ";
-    wBMI[1]="BMI nie zostalo obliczone, ponieważ jest wskaźnikiem dla osób powyżej 18 roku życia";
-    wBMI[2]="                  Wiek: 19 - 24 lata     -     BMI: 19 - 24                        ";
-    wBMI[3]="                  Wiek: 25 - 34 lata     -     BMI: 20 - 25                        ";
-    wBMI[4]="                  Wiek: 35 - 44 lata     -     BMI: 21 - 26                        ";
-    wBMI[5]="                  Wiek: 45 - 54 lata     -     BMI: 22 - 27                        ";
-    wBMI[6]="                  Wiek: 55 - 64 lata     -     BMI: 23 - 28                        ";
-    wBMI[7]="                  Wiek: ponad 64 lata    -     BMI: 24 - 29                        ";
+    fstream file_wBMI;
+    file_wBMI.open("Dane/Klasyfikacja_BMI_wiek.txt", ios::in);
+    if(file_wBMI.good()==false){
+        cout << "Plik nie został znaleziony, nie można wyświetlić danych :(" << endl;
+    }
+    while(getline(file_wBMI,line)){
 
-    //Uchwyt do zmiany czcionki w konsoli
-    HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
+        wBMI[noLine-1]=line;
+        noLine++;
+    }
+    file_wBMI.close();
 
     switch(f_etap){
     case 1:{
@@ -339,6 +387,7 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
         }
     }break;
     case 10:{
+        cout<<endl;
         int i=0;
         while(i<9){
             if(i==0){
@@ -353,6 +402,7 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
         }
     }break;
     case 11:{
+        cout<<endl;
         int i=0;
         while(i<9){
             if(i==0){
@@ -567,35 +617,35 @@ int stopienAktywnosci;
 
     switch(stopienAktywnosci){
     case 1:{
-        EAT_x=f_BMR*0.2;
+        EAT_x=f_BMR*1.2;
     }
     case 2:{
-        EAT_x=f_BMR*0.3;
-        EAT_y=f_BMR*0.4;
+        EAT_x=f_BMR*1.3;
+        EAT_y=f_BMR*1.4;
     }
     case 3:{
-        EAT_x=f_BMR*0.5;
-        EAT_y=f_BMR*0.6;
+        EAT_x=f_BMR*1.5;
+        EAT_y=f_BMR*1.6;
     }
     case 4:{
-        EAT_x=f_BMR*0.7;
-        EAT_y=f_BMR*0.8;
+        EAT_x=f_BMR*1.7;
+        EAT_y=f_BMR*1.8;
     }
     case 5:{
-        EAT_x=f_BMR*0.9;
+        EAT_x=f_BMR*1.9;
         EAT_y=f_BMR*1.2;
     }
     }
 
     // Prosty wzór na średnie TDEE
-    TDEE=floor(f_BMR+(EAT_x+EAT_y)/2);
+    TDEE=trunc((EAT_x+EAT_y)/2);
 
     //.....................................................................................................
 
     cout << endl;
     cout << "Przybliżona wartość Twojego całkowitego zapotrzebowania energetycznego" << endl;
     cout << "mieści się w przedziale:   ";
-    cout << trunc(f_BMR+EAT_x) << " - " << trunc(f_BMR+EAT_y) << " [kcal]" << endl;
+    cout << trunc(EAT_x) << " - " << trunc(EAT_y) << " [kcal]" << endl;
     cout << "A to w przybliżeniu oznacza średnio:"<< endl;
     cout << "TDEE = BMR + ~EAT* =         " << TDEE << " [kcal]" << endl;
 
@@ -668,3 +718,50 @@ void rozmiarOkna(int x_s, int y_s){
     SetConsoleWindowInfo(uchwyt,true,&sr); // ustawia rozmiar okna (jednostka to szerokość i wysokość pojedynczego znaku)
 }
 */
+
+/*
+oBMI1[0]="         Klasyfikacja masy ciała osób dorosłych na podstawie BMI            ";
+oBMI1[1]="Wygłodzenie                        |  BMI < 16,0      |  Waga ciała: niedowaga";
+oBMI1[2]="Wychudzenie                         |  BMI 16,0-16,99  |  Waga ciała: niedowaga";
+oBMI1[3]="Niedowaga                           |  BMI 17,0-18,49  |  Waga ciała: niedowaga";
+oBMI1[4]="Porządana masa ciała              |  BMI 18,5-24,99  |  Waga ciała: optimum  ";
+oBMI1[5]="Nadwaga                             |  BMI 25,0-29,99  |  Waga ciała: niedowaga";
+oBMI1[6]="Otyłość I stopnia                |  BMI 30,0-34,99  |  Waga ciała: otyłość  ";
+oBMI1[7]="Otyłość II stopnia (duza)        |  BMI 35,0-39,99  |  Waga ciała: otyłość  ";
+oBMI1[8]="Otyłość II stopnia (chorobliwa)  |  BMI > 40,0      |  Waga ciała: otyłość  ";
+
+
+oBMI2[0]="             Klasyfikacja masy ciała osób dorosłych na podstawie BMI    ";
+oBMI2[1]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
+oBMI2[2]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
+oBMI2[3]="   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ";
+oBMI2[4]="   |  Ryzyko chorób towarzyszacych Otyłość:  | minimalne                ";
+oBMI2[5]="   |  Ryzyko chorób towarzyszacych Otyłość:  | śednie                   ";
+oBMI2[6]="|  Ryzyko chorób towarzyszacych Otyłość:  | wysokie                     ";
+oBMI2[7]="|  Ryzyko chorób towarzyszacych Otyłość:  | bardzo wysokie              ";
+oBMI2[8]="|  Ryzyko chorób towarzyszacych Otyłość:  | ekstremalny poziom ryzyka   ";
+*/
+
+/*
+    wBMI[0]="              Pożądany BMI zależy od wieku i wynosi odpowiednio:                   ";
+    wBMI[1]="BMI nie zostalo obliczone, ponieważ jest wskaźnikiem dla osób powyżej 18 roku życia";
+    wBMI[2]="                  Wiek: 19 - 24 lata     -     BMI: 19 - 24                        ";
+    wBMI[3]="                  Wiek: 25 - 34 lata     -     BMI: 20 - 25                        ";
+    wBMI[4]="                  Wiek: 35 - 44 lata     -     BMI: 21 - 26                        ";
+    wBMI[5]="                  Wiek: 45 - 54 lata     -     BMI: 22 - 27                        ";
+    wBMI[6]="                  Wiek: 55 - 64 lata     -     BMI: 23 - 28                        ";
+    wBMI[7]="                  Wiek: ponad 64 lata    -     BMI: 24 - 29                        ";
+*/
+
+
+    //Koniec pobierania danych
+/*
+            cout<<"======================================================================================="<<endl;
+            cout<<"   Dziękuję serdecznie za wsparcie i cierpliwość wszystkim wokół mnie <3!"<<endl;
+            cout<<"   Proszę, o ile to nie będzie problem, o feedback"<<char(2)<<" Like'i, komentaże, subskrypcje."<<char(3)<<endl;
+            cout<<"   W sprawie intrpretacji wyników odsyłam Cię do wpisu z dnia: 15 Października 2020r"<<endl;
+            cout<<"   Odchudzanie, diety. Jak skutecznie się odchudzać bez efektu jo-jo na blogu:"<<endl;
+            cout<<"   https://lesserr4more.wordpress.com/"<<endl;
+            cout<<"   P.S. !Jeśli Twoje ciało to żywa masa mięśniowa - wskaźnik BMI nie jest dla Ciebie!"<<endl;
+            cout<<"   Pozdrawiam serdecznie! - L4M"<<endl;
+            cout<<"======================================================================================="<<endl<<endl;*/

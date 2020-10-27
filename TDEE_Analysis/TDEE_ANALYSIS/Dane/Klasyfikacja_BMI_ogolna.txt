@@ -1,0 +1,19 @@
+         Klasyfikacja masy ciała osób dorosłych na podstawie BMI            ;
+Wygłodzenie                        |  BMI < 16,0      |  Waga ciała: niedowaga;
+Wychudzenie                         |  BMI 16,0-16,99  |  Waga ciała: niedowaga;
+Niedowaga                           |  BMI 17,0-18,49  |  Waga ciała: niedowaga;
+Porządana masa ciała              |  BMI 18,5-24,99  |  Waga ciała: optimum  ;
+Nadwaga                             |  BMI 25,0-29,99  |  Waga ciała: niedowaga;
+Otyłość I stopnia                |  BMI 30,0-34,99  |  Waga ciała: otyłość  ;
+Otyłość II stopnia (duza)        |  BMI 35,0-39,99  |  Waga ciała: otyłość  ;
+Otyłość II stopnia (chorobliwa)  |  BMI > 40,0      |  Waga ciała: otyłość  ;
+
+             Klasyfikacja masy ciała osób dorosłych na podstawie BMI    ;
+   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ;
+   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ;
+   |  Zwiększony poziom wystąpienia innych problemów zdrowotnych        ;
+   |  Ryzyko chorób towarzyszacych Otyłość:  | minimalne                ;
+   |  Ryzyko chorób towarzyszacych Otyłość:  | śednie                   ;
+|  Ryzyko chorób towarzyszacych Otyłość:  | wysokie                     ;
+|  Ryzyko chorób towarzyszacych Otyłość:  | bardzo wysokie              ;
+|  Ryzyko chorób towarzyszacych Otyłość:  | ekstremalny poziom ryzyka   ;
