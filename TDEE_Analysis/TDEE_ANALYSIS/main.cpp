@@ -13,6 +13,7 @@ using namespace std;
 
 void kropki();
 void blad();
+void colour(char);
 void wyswietl(int, float, int, float, float, float, float, float);
 // Obliczenia
 float obliczBMI(float, float);
@@ -26,6 +27,7 @@ void rozmiarOkna(int, int);
 
 //---------------------------------------------------------------------------------------------------------
 
+HANDLE colHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 // Deklaracja zmiennych
 string choice;
@@ -39,50 +41,47 @@ float     typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_w
 float     trening_sily, trening_wyt_lekka, trening_wyt_srednia, trening_wyt_wysoka;
 string    plec, trenuje, obliczam_sam, thx[10];
 
-//Uchwyt do zmiany czciąki w konsoli
-HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
-
 //---------------------------------------------------------------------------------------------------------
 
 int main()
 {
-
+    system("chcp 65001");
     while(mainChoice!='0')
     {
-        SetConsoleTextAttribute(uchwyt, 15);//ZMIEN KOLOR NA NR 15=WHITE
+        colour('w');
         //MAIN MENU
         system("cls");
         cout<<"==================================================================================="<<endl;
-        SetConsoleTextAttribute(uchwyt, 14);//ZMIEN KOLOR NA NR 14=YELLOW
+        colour('p');
         cout<<"                      Obliczanie zapotrzebowania kalorycznego  "<<endl;
-        SetConsoleTextAttribute(uchwyt, 15);//PRZYWROC KOLOR BIALY
+        colour('w');
         cout<<"==================================================================================="<<endl;
-        SetConsoleTextAttribute(uchwyt, 12);
-        cout<<"                              Wybierz jedną z opcji "<<char(25)<<endl;
-        SetConsoleTextAttribute(uchwyt, 15);
+        colour('b');
+        cout<<"                              Wybierz jedną z opcji "<<endl;
+        colour('w');
         cout<<"==================================================================================="<<endl;
-        cout<<"  1.  Obliczanie wskaźnika masy ciała   "<<char(16);     SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ BMI ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  2.  Podstawowa przemiana materii        "<<char(16);  SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ BMR (PPM) ]"<<endl;                        SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  3.  Podstawowa analiza kaloryki         "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ TDEE (PPM) ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  4.  Szczegółowa analiza kaloryki      "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ TDEE (PPM) ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  5.  Wy˜świetlanie przedziałów BMI   "<<char(16);      SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ Klasyfikacja BMI ogólna ]"<<endl;          SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  6.  Wy˜świetlanie przedziałów BMI   "<<char(16);      SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ W zależności od wieku ]"<<endl;            SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  7.  Dobór kaloryki w diecie            "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ Masa, utrzymanie lub redukcja ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
-        cout<<"  8.  Kasowanie pamięci                  "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
-        cout<<"[ By obliczyć dla innych parametrów ] "<<endl;SetConsoleTextAttribute(uchwyt, 15);
+        cout<<"  1.  Obliczanie wskaźnika masy ciała     "    ;colour('b'); colour('l');
+        cout<<"[ BMI ]"<<endl;                                ;colour('w');
+        cout<<"  2.  Podstawowa przemiana materii        "    ;colour('b'); colour('l');
+        cout<<"[ BMR (PPM) ]"<<endl;                          ;colour('w');
+        cout<<"  3.  Podstawowa analiza kaloryki         "    ;colour('b'); colour('l');
+        cout<<"[ TDEE ]"<<endl;                               ;colour('w');
+        cout<<"  4.  Szczegółowa analiza kaloryki        "    ;colour('b'); colour('l');
+        cout<<"[ TDEE ]"<<endl;                               ;colour('w');
+        cout<<"  5.  Wy~świetlanie przedziałów BMI       "    ;colour('b'); colour('l');
+        cout<<"[ Klasyfikacja BMI ogólna ]"<<endl;            ;colour('w');
+        cout<<"  6.  Wy~świetlanie przedziałów BMI       "    ;colour('b'); colour('l');
+        cout<<"[ W zależności od wieku ]"<<endl;              ;colour('w');
+        cout<<"  7.  Dobór kaloryki w diecie             "    ;colour('b'); colour('l');
+        cout<<"[ Masa, utrzymanie lub redukcja ] "<<endl;     ;colour('w');
+        cout<<"  8.  Kasowanie pamięci                   "    ;colour('b'); colour('l');
+        cout<<"[ By obliczyć dla innych parametrów ] "<<endl; ;colour('w');
         cout<<"  9.  Podziękowania! Objaśnienie wyników"<<endl;
         cout<<"  0.  Koniec programu "<<endl;
         cout<<"==================================================================================="<<endl;
-        SetConsoleTextAttribute(uchwyt, 12);
+        colour('b');
         cout<<"      Twój wybór (wpisz nr wybranej opcji): ";
-        SetConsoleTextAttribute(uchwyt, 15);
+        colour('w');
         mainChoice = getch();
 
         //Walidacja CZY TO LICZBA 0-9?
@@ -102,16 +101,20 @@ int main()
                     passD = true;
                     cout << endl;
                     cout << "Wprowadź parametry zaokrąglone do pełnych liczb dziesiętnych, odpowiedź zatwierdz klawiszem Enter" << endl;
-                    cout << "Waga[kg]: ";       cin >> waga;
+                    cout << "Waga[kg]: ";   colour('l');
+                    cin >> waga;            colour('w');
                     tempChoice = waga;
                     if(tempChoice <= 2 || tempChoice > 300) passD = false;
-                    cout << "Wzrost[cm]: ";     cin >> wzrost;
+                    cout << "Wzrost[cm]: "; colour('l');
+                    cin >> wzrost;          colour('w');
                     tempChoice = wzrost;
                     if(tempChoice <= 2 || tempChoice > 300) passD = false;
-                    cout << "Wiek[lat]: ";      cin >> wiek;
+                    cout << "Wiek[lat]: ";  colour('l');
+                    cin >> wiek;            colour('w');
                     tempChoice = wiek;
                     if(tempChoice <= 1 || tempChoice > 120) passD = false;
-                    cout << "Płec[K/M]: ";      cin >> plec;
+                    cout << "Płec[K/M]: ";  colour('l');
+                    cin >> plec;            colour('w');
                     transform(plec.begin(), plec.end(), plec.begin(),::tolower);
                     if(plec != "k" && plec != "m") passD = false;
                     if(passD==false){
@@ -130,18 +133,45 @@ int main()
         switch(mainChoice){
             case '1': {
                 kropki();
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                           Obliczanie zapotrzebowania BMI  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                                  BODY MASS INDEX "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
                 BMI = obliczBMI(waga,wzrost);
                 wyswietl(1, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
             case '2': {
                 kropki();
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                           Obliczanie zapotrzebowania BMR  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                            PODSTAWOWA PRZEMIANA MATERII "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
                 BMR = obliczBMR(plec,waga,wzrost,wiek);
                 wyswietl(2, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
             case '3': {
                 kropki();
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                          Obliczanie zapotrzebowania TDEE  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                            Podstawowa analiza kaloryki "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
                 if(BMR==0) BMR = obliczBMR(plec,waga,wzrost,wiek);
                 wyswietl(2, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 Sleep(1500);
@@ -150,29 +180,90 @@ int main()
             }break;
             case '4': {
                 kropki();
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                          Obliczanie zapotrzebowania TDEE  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                            Szczegółowa analiza kaloryki "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
                 if(BMR==0) BMR = obliczBMR(plec,waga,wzrost,wiek);
                 TDEE = obliczTDEEfull(BMR, wiek);
                 wyswietl(5, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE);
                 system("pause");
             }break;
-            case '5': {wyswietl(10, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
-            case '6': {wyswietl(11, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");} break;
+            case '5': {
+                kropki();
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                              Klasyfikacja BMI ogólna  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                                Bez podziału na wiek "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                wyswietl(10, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");
+                } break;
+            case '6': {
+                kropki();
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                            Klasyfikacja BMI szczegółowa "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                     Przedziały dla poszczególnych grup wiekowych "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                wyswietl(11, wiek, NEAT, BMI, BMR, TEF, EAT, TDEE); system("pause");
+                } break;
             case '7': {
                 kropki();
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                              Dobór kaloryki w dziecie  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                                W zależności od celu "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
                 obliczDoborKcal(TDEE);
                 system("pause");
             }break;
             case '8':
             {
+                kropki();
                 waga=0;
                 wzrost=0;
                 wiek=0;
                 plec="";
-                cout<< "Dane zostały usunięte :)!";
+
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                               Dane zostały usunięte  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                          Możesz ponownie dokonać obliczeń "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+
                 system("pause");
             }break;
             case '0': {
-                    cout<<endl<<"Koniec programu! Dzieki serdeczne!"<<endl;
+                cout<<"==================================================================================="<<endl;
+                colour('p');
+                cout<<"                                  Koniec programu  "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
+                colour('b');
+                cout<<"                   DERDECZNIE DZIĘKUJEMY I ŻYCZYMY DOBREGO DNIA! "<<endl;
+                colour('w');
+                cout<<"==================================================================================="<<endl;
                     kropki();
                     exit(0);
                     }break;
@@ -182,7 +273,7 @@ int main()
         if(mainChoice=='9') //PODZIEKOWANIA
         {
             cout<<endl;
-            SetConsoleTextAttribute(uchwyt, 14);
+            SetConsoleTextAttribute(colHandle, 14);
 
         // Pobieranie danych Podziękowanie z pliku
             int noLine=1;
@@ -203,7 +294,7 @@ int main()
 
             file_thx.close();
 
-            SetConsoleTextAttribute(uchwyt, 15);
+            SetConsoleTextAttribute(colHandle, 15);
             system("pause");
         }
         else if (pass==true) blad();//NIEPOPRAWNA OPCJA W MENU
@@ -217,11 +308,11 @@ int main()
 //---------------------------------------------------------------------------------------------------------
 void blad(){
             cout<<endl;
-            SetConsoleTextAttribute(uchwyt, 12);
+            SetConsoleTextAttribute(colHandle, 12);
             cout<<"==============================================================================="<<endl;
             cout<<"                     Coś poszło nie tak, spróbuj ponownie!"<<endl;
             cout<<"==============================================================================="<<endl<<endl;
-            SetConsoleTextAttribute(uchwyt, 15);
+            SetConsoleTextAttribute(colHandle, 15);
             system("pause");
 }
 //---------------------------------------------------------------------------------------------------------
@@ -237,7 +328,7 @@ void kropki(){
 
 
 //---------------------------------------------------------------------------------------------------------
-// Wy˜wietlanie obliczonych danych na czystym ekranie
+// Wy~wietlanie obliczonych danych na czystym ekranie
 void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, float f_TEF, float f_EAT, float f_TDEE){
 
     // Deklaracja zmiennych
@@ -308,8 +399,6 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
 
     switch(f_etap){
     case 1:{
-        system("cls");
-
         if(f_wiek >= 19 && f_wiek <= 24){
             grupa2 = 1;
             BMI_min = 19.0;
@@ -379,9 +468,9 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
     }break;
     case 6:{
         for(int i=0; i>=8; i++){
-        if(i==0) SetConsoleTextAttribute(uchwyt, 14);//ZMIEN KOLOR NA NR 14=YELLOW
-        else if(i == grupa1) SetConsoleTextAttribute(uchwyt, 11);//ZMIEN KOLOR NA NR 14=YELLOW
-        else SetConsoleTextAttribute(uchwyt, 15);//PRZYWROC KOLOR BIALY
+        if(i==0) SetConsoleTextAttribute(colHandle, 14);//ZMIEN KOLOR NA NR 14=YELLOW
+        else if(i == grupa1) SetConsoleTextAttribute(colHandle, 11);//ZMIEN KOLOR NA NR 14=YELLOW
+        else SetConsoleTextAttribute(colHandle, 15);//PRZYWROC KOLOR BIALY
         cout << oBMI1[i];
         cout << endl;
         }
@@ -392,9 +481,9 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
         while(i<9){
             if(i==0){
                 cout<<"==================================================================================="<<endl;
-                SetConsoleTextAttribute(uchwyt, 14);//ZMIEN KOLOR NA NR 14=YELLOW
+                SetConsoleTextAttribute(colHandle, 14);//ZMIEN KOLOR NA NR 14=YELLOW
                 cout<< oBMI1[i] <<endl;
-                SetConsoleTextAttribute(uchwyt, 15);//PRZYWROC KOLOR BIALY
+                SetConsoleTextAttribute(colHandle, 15);//PRZYWROC KOLOR BIALY
                 cout<<"==================================================================================="<<endl;
             }
             i++;
@@ -407,9 +496,9 @@ void wyswietl(int f_etap, float f_wiek, int f_NEAT, float f_BMI, float f_BMR, fl
         while(i<9){
             if(i==0){
                 cout<<"==================================================================================="<<endl;
-                SetConsoleTextAttribute(uchwyt, 14);//ZMIEN KOLOR NA NR 14=YELLOW
+                SetConsoleTextAttribute(colHandle, 14);//ZMIEN KOLOR NA NR 14=YELLOW
                 cout<< wBMI[i] <<endl;
-                SetConsoleTextAttribute(uchwyt, 15);//PRZYWROC KOLOR BIALY
+                SetConsoleTextAttribute(colHandle, 15);//PRZYWROC KOLOR BIALY
                 cout<<"==================================================================================="<<endl;
             }
             i++;
@@ -449,6 +538,7 @@ float     typ_osoby, minut_sily, minut_wyt_lekka, minut_wyt_srednia, minut_wyt_w
 float     trening_sily, trening_wyt_lekka, trening_wyt_srednia, trening_wyt_wysoka;
 string    trenuje, obliczam_sam;
 
+
     TEF = 0.07;
     cout << "Pierwszy krok, poza BMR, to założenie TEF. Na potrzeby naszych obliczeń przyjmiemy "<< trunc(TEF*100) << "%" << endl;
     Sleep(1500);
@@ -472,7 +562,7 @@ string    trenuje, obliczam_sam;
         cout << "Czy wiesz ile śednio kalorii spalasz dziennie w trakcie aktywnośi?"              << endl;
         cout << "Odpowiedz TAK[T], jeśi chcesz samodzielnie wprowadzić śednią wartość spalanych kalorii"             << endl;
         cout << "( jeśi używasz do tego dokładnych przyżądów pomiarowych )"    << endl;
-        cout << "Odpowiedz NIE[N], je˜li chcesz, aby obliczył to za Ciebie program [T/N]: ";                        cin >> obliczam_sam;
+        cout << "Odpowiedz NIE[N], je~li chcesz, aby obliczył to za Ciebie program [T/N]: ";                        cin >> obliczam_sam;
     }
 
     transform(obliczam_sam.begin(), obliczam_sam.end(), obliczam_sam.begin(),::tolower);
@@ -652,33 +742,32 @@ int stopienAktywnosci;
     return(TDEE);
 }
 
-
 float obliczDoborKcal(float f_TDEE){
     int dieta;
     if(f_TDEE!=0){
 
-        SetConsoleTextAttribute(uchwyt, 15);//ZMIEN KOLOR NA NR 15=WHITE
+        SetConsoleTextAttribute(colHandle, 15);//ZMIEN KOLOR NA NR 15=WHITE
             //MAIN MENU
             system("cls");
             cout<<"==================================================================================="<<endl;
-            SetConsoleTextAttribute(uchwyt, 14);//ZMIEN KOLOR NA NR 14=YELLOW
+            SetConsoleTextAttribute(colHandle, 14);//ZMIEN KOLOR NA NR 14=YELLOW
             cout<<"                         Wybierz interesującą Cię dietę...  "<<endl;
-            SetConsoleTextAttribute(uchwyt, 15);//PRZYWROC KOLOR BIALY
+            SetConsoleTextAttribute(colHandle, 15);//PRZYWROC KOLOR BIALY
             cout<<"==================================================================================="<<endl;
-            SetConsoleTextAttribute(uchwyt, 12);
-            cout<<"                              Wybierz jedną z opcji "<<char(25)<<endl;
-            SetConsoleTextAttribute(uchwyt, 15);
+            SetConsoleTextAttribute(colHandle, 12);
+            cout<<"                              Wybierz jedną z opcji "<<endl;
+            SetConsoleTextAttribute(colHandle, 15);
             cout<<"==================================================================================="<<endl;
-            cout<<"  1.  Redukcja                            "<<char(16);     SetConsoleTextAttribute(uchwyt, 11);
-            cout<<"[ Wybirz jeśli chcesz zrzucić masę ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
-            cout<<"  2.  Utrzymanie                          "<<char(16);  SetConsoleTextAttribute(uchwyt, 11);
-            cout<<"[ Wybirz jeśli chcesz utrzymać masę ]"<<endl;                        SetConsoleTextAttribute(uchwyt, 15);
-            cout<<"  3.  Masa                                "<<char(16);    SetConsoleTextAttribute(uchwyt, 11);
-            cout<<"[ Wybirz jeśli chcesz nabrać masy ]"<<endl;                             SetConsoleTextAttribute(uchwyt, 15);
+            cout<<"  1.  Redukcja                            "<<char(16);     SetConsoleTextAttribute(colHandle, 11);
+            cout<<"[ Wybirz jeśli chcesz zrzucić masę ]"<<endl;                             SetConsoleTextAttribute(colHandle, 15);
+            cout<<"  2.  Utrzymanie                          "<<char(16);  SetConsoleTextAttribute(colHandle, 11);
+            cout<<"[ Wybirz jeśli chcesz utrzymać masę ]"<<endl;                        SetConsoleTextAttribute(colHandle, 15);
+            cout<<"  3.  Masa                                "<<char(16);    SetConsoleTextAttribute(colHandle, 11);
+            cout<<"[ Wybirz jeśli chcesz nabrać masy ]"<<endl;                             SetConsoleTextAttribute(colHandle, 15);
             cout<<"==================================================================================="<<endl;
-            SetConsoleTextAttribute(uchwyt, 12);
+            SetConsoleTextAttribute(colHandle, 12);
             cout<<"      Twój wybór (wpisz nr wybranej opcji): ";
-            SetConsoleTextAttribute(uchwyt, 15);
+            SetConsoleTextAttribute(colHandle, 15);
             cin>>dieta;
 
             switch(dieta){
@@ -702,20 +791,34 @@ float obliczDoborKcal(float f_TDEE){
 
 }
 
+void colour(char pickColour){
+
+    switch(pickColour){
+        case 'w': SetConsoleTextAttribute(colHandle, 15); break;//ZMIEN KOLOR NA NR 15=WHITE
+        case 'p': SetConsoleTextAttribute(colHandle, 13); break;//ZMIEN KOLOR NA NR 13=PURPLE
+        case 'l': SetConsoleTextAttribute(colHandle, 11); break;//ZMIEN KOLOR NA NR 11=lightBLUE
+        case 'g': SetConsoleTextAttribute(colHandle, 10); break;//ZMIEN KOLOR NA NR 10=GRAY
+        case 'r': SetConsoleTextAttribute(colHandle, 12); break;//ZMIEN KOLOR NA NR 12=RED
+        case 'R': SetConsoleTextAttribute(colHandle, 64); break;//ZMIEN KOLOR NA NR 64=BLACK IN RED
+        case 'b': SetConsoleTextAttribute(colHandle, 9) ; break;//ZMIEN KOLOR NA NR 9=BLUE
+        case 'B': SetConsoleTextAttribute(colHandle, 48); break;//ZMIEN KOLOR NA NR 48=BLUE IN BLUE
+    }
+}
+
 /*
 void rozmiarOkna(int x_s, int y_s){
-    //Uchwyt do zmiany czciąki w konsoli
-    HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
+    //colHandle do zmiany czciąki w konsoli
+    HANDLE colHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD c2; // struktura potrzebna do ustawienia rozmiarów bufora pamięci
     c2.X = x_s; // szerokość na 120 szerokości znaków
     c2.Y = y_s; // wysokość na 40 wysokości znaków
-    SetConsoleScreenBufferSize(uchwyt, c2); // ustawia rozmiar bufora (wyświetlanego tekstu)
+    SetConsoleScreenBufferSize(colHandle, c2); // ustawia rozmiar bufora (wyświetlanego tekstu)
     SMALL_RECT sr; // struktura wykorzystywana do ustawienia rozmiaru okna
     sr.Left = 0; // na zero
     sr.Top = 0; // na zero
     sr.Right = c2.X+1; // szerokość o 1 mniejsza od bufora
     sr.Bottom = c2.Y-1; // wysokość o 1 mniejsza od bufora
-    SetConsoleWindowInfo(uchwyt,true,&sr); // ustawia rozmiar okna (jednostka to szerokość i wysokość pojedynczego znaku)
+    SetConsoleWindowInfo(colHandle,true,&sr); // ustawia rozmiar okna (jednostka to szerokość i wysokość pojedynczego znaku)
 }
 */
 
